@@ -1,0 +1,56 @@
+TESTOVÁNÍ NA PRACOVNÍM PC A V XILOG PLUS
+======================================
+
+1. Rozbalte CELÝ ZIP do vlastní složky, například na plochu. EXE nespouštějte
+   uvnitř ZIP. Spusťte ObrysCNC.exe. Pro běh je potřeba .NET Framework 4.8;
+   sestavování ani spouštění automatických testů není pro používání nutné.
+2. Nastavení aplikace je v %APPDATA%\ObrysCNC\nastaveni.ini. Stávající
+   nastavení pracovního PC se nepřepisuje rozbalením tohoto balíčku.
+   Kopie nastavení vývojového PC je v konfigurace\nastaveni-vyvojove-PC.ini.
+   Jde o referenční kopii, nikoli povinné nastavení cílového stroje.
+   Pokud ji chcete použít, zavřete aplikaci, zazálohujte cílové nastaveni.ini
+   a teprve potom kopii ručně přejmenujte a nahraďte. Obnovit lze ze zálohy.
+3. Zkontrolujte tři karty a skutečné rozměry desky. V editoru otevřete
+   testy\vysledky\kruh_R100.dxf ve spodní soustavě. Ctrl + kliknutí vybere
+   druhý bod. Kruh je tvořen dvěma půlkruhy, panel má uvést dva rádiusy 100 mm.
+   Zapnutý zámek má zabránit posunu myší a šipkami; výběr musí fungovat.
+4. Obrázek testy\vysledky\test-aplikace.png obsahuje různé testovací motivy.
+   Při převodu sledujte diagnostiku, toleranci a výsledek opětovného načtení DXF.
+   Nezaměňujte správnost DXF s geometrickou přesností vůči předloze.
+
+XILOG – NEJDŘÍVE ZAZNAMENAT STÁVAJÍCÍ NASTAVENÍ
+5. Otevřete DXF v importním okně Xilog Plus, před převodem na PGM.
+   V nabídce Edit / Úpravy otevřete General settings / Obecná nastavení.
+   Zaznamenejte DX, DY, DZ, BX, BY, měřítko, stranu dílce a pracovní oblast.
+   Ve stejné nabídce otevřete Reference system / Referenční systém.
+   Zaznamenejte zrcadlení X/Y a směr oblouků. Názvy se mohou lišit dle jazyka.
+   Návod výrobce: https://www.scribd.com/document/966846085/Editor-GB
+   Kapitola 6.6 a přehled nabídek na tištěné straně 356.
+6. Pro problémový příklad použijte soubor ve složce ukazky-xilog.
+   Nastavte desku 1520 x 1310 mm, tloušťku dle skutečného dílce; zkontrolujte
+   importní měřítko a posuny. Rozsah původního souboru je v AKTUALNI-STAV.txt.
+   Případné změny nejdříve pouze v náhledu a zaznamenat před/po.
+   Nestačí, aby se obrázek vešel: musí sedět orientace a vzdálenost od okrajů.
+7. Pro srovnání soustav slouží testy\vysledky\stroj-Y-dole.dxf a
+   stroj-Y-nahore.dxf. Vznikly pro desku 1000 x 600 mm. Obsahují shodnou
+   fyzickou předlohu v různých soustavách: horní soubor má Y = 600 - Y spodní
+   a opačné znaménko bulge. V Xilogu se ověřuje interpretace každé soustavy,
+   nikoli import obou se stejnými předpoklady. Oblouky mají rádiusy 20 a 10 mm.
+8. Ověřte kruh R100 (dva skutečné půlkruhy), mezikruží (čtyři půlkruhy),
+   kapsli R50 (dvě přímky a dva půlkruhy), horní rohy R32 (4 přímky, 2 oblouky).
+   V Xilogu ověřte skutečné obloukové dráhy a poloměry, nejen hladký náhled.
+   Testy s R100 mají geometrii v rozsahu předlohy zhruba 320 x 300 mm;
+   pro jednotlivé ostatní soubory zkontrolujte jejich rozsah a nastavte desku
+   dostatečně velkou, například 1000 x 600 mm, bez neočekávaného měřítka.
+9. Zaznamenejte verzi Xilog, typ stroje, zdrojový soubor, všechna nastavení
+   importu, naměřený rádius a polohu alespoň jednoho známého bodu.
+   Do PROTOKOL-PRACOVNI-PC.txt vyplňte skutečné výsledky.
+
+Tento balíček je pro testy. Neobsahuje schválený obráběcí program a žádný
+test automaticky neodesílá data na CNC. Známé problémy jsou v AKTUALNI-STAV.txt.
+
+AUTOMATICKÉ TESTY (VOLITELNÉ)
+Se zavřenou aplikací spusťte testy\overit.cmd. Přeloží EXE a spustí testy.
+Výsledky jsou v testy\vysledky. Testy mohou trvat několik minut.
+Při nedostupném WebP kodeku může selhat test stromu; pro používání převádějte
+WebP do PNG. Návratový kód 0 neodstraňuje samostatná varování kvality předloh.

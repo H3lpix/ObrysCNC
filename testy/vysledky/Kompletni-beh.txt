@@ -1,0 +1,421 @@
+Hotovo: C:\Users\tmark\Desktop\Lisplast\CNC\ObrysCNC\ObrysCNC.exe
+== horni_rohy_R32 (97 ms)
+    primek 4, oblouku 2, rohu 2, ZLOMU (netecnych napojeni) 0, kratkych (<1 px) 0, segmentu celkem 6
+    polomery: 32.04, 32.04
+    odchylka od skutecneho tvaru: max 0,017 px (zpet 0,017), prumer 0,010 px; max uhel tecneho napojeni 0,0000 st.
+    diagnostika: CAD 1, nahradni 0, hladky 0; primek 4, oblouku 2, rohu 2, zlomu 0, kratkych 0; odchylka max 0.042 px, prumer 0.001 px; max netecnost 0.0000 st.; pred optimalizaci 4 primek, 2 oblouku, 2 rohu, max 0.042 px; kruznic 0; sum hrany 0.004 px; tolerance 0.900 px
+    [ OK ] ocekavano 4 primek, 2 oblouku, 2 rohu
+TAB|horni_rohy_R32|4|2|2|0|0.017
+    [ OK ] polomery R32, R32 (+-1 %, min. 0,35 px)
+    [ OK ] zadne netecne zlomy mimo ostre rohy
+    [ OK ] zadne kratke useky
+    [ OK ] odchylka od skutecneho tvaru do 0.35 px
+    [ OK ] vsechny obrysy uzavrene, pocet 1
+    [ OK ] orientace: vnejsi CCW, otvory CW
+    DXF: 1 POLYLINE, 6 VERTEX, 2 s bulge (v pameti 2 oblouku), max rozdil po nacteni 0,00000 mm, polomeru 0,00000 mm, netecnost po zaokrouhleni 0,0000 st.
+    [ OK ] DXF obsahuje stejne entity, oblouky a polomery; tecnost po zaokrouhleni do 0,01 st.
+== obdelnik_R32 (19 ms)
+    primek 4, oblouku 4, rohu 0, ZLOMU (netecnych napojeni) 0, kratkych (<1 px) 0, segmentu celkem 8
+    polomery: 32.04, 32.04, 32.04, 32.04
+    odchylka od skutecneho tvaru: max 0,018 px (zpet 0,018), prumer 0,011 px; max uhel tecneho napojeni 0,0000 st.
+    diagnostika: CAD 1, nahradni 0, hladky 0; primek 4, oblouku 4, rohu 0, zlomu 0, kratkych 0; odchylka max 0.042 px, prumer 0.002 px; max netecnost 0.0000 st.; pred optimalizaci 4 primek, 4 oblouku, 0 rohu, max 0.042 px; kruznic 0; sum hrany 0.006 px; tolerance 0.900 px
+    [ OK ] ocekavano 4 primek, 4 oblouku, 0 rohu
+TAB|obdelnik_R32|4|4|0|0|0.018
+    [ OK ] polomery R32, R32, R32, R32 (+-1 %, min. 0,35 px)
+    [ OK ] zadne netecne zlomy mimo ostre rohy
+    [ OK ] zadne kratke useky
+    [ OK ] odchylka od skutecneho tvaru do 0.35 px
+    [ OK ] vsechny obrysy uzavrene, pocet 1
+    [ OK ] orientace: vnejsi CCW, otvory CW
+    DXF: 1 POLYLINE, 8 VERTEX, 4 s bulge (v pameti 4 oblouku), max rozdil po nacteni 0,00000 mm, polomeru 0,00000 mm, netecnost po zaokrouhleni 0,0000 st.
+    [ OK ] DXF obsahuje stejne entity, oblouky a polomery; tecnost po zaokrouhleni do 0,01 st.
+== kruh_R100 (20 ms)
+    primek 0, oblouku 2, rohu 0, ZLOMU (netecnych napojeni) 0, kratkych (<1 px) 0, segmentu celkem 2
+    polomery: 100.00, 100.00
+    odchylka od skutecneho tvaru: max 0,003 px (zpet 0,003), prumer 0,003 px; max uhel tecneho napojeni 0,0000 st.
+    diagnostika: CAD 1, nahradni 0, hladky 0; primek 0, oblouku 2, rohu 0, zlomu 0, kratkych 0; odchylka max 0.040 px, prumer 0.012 px; max netecnost 0.0000 st.; pred optimalizaci 0 primek, 4 oblouku, 0 rohu, max 0.041 px; kruznic 1; sum hrany 0.015 px; tolerance 0.900 px
+    [ OK ] ocekavano 0 primek, 2 oblouku, 0 rohu
+    [ OK ] celych kruznic (2 pulkruhy): 1, ocekavano 1
+    [ OK ] kruznice stred 120,120 R100: odchylka stredu 0.000 px, polomeru 0.003 px
+TAB|kruh_R100|0|2|0|1|0.003
+    [ OK ] polomery R100, R100 (+-1 %, min. 0,35 px)
+    [ OK ] zadne netecne zlomy mimo ostre rohy
+    [ OK ] zadne kratke useky
+    [ OK ] odchylka od skutecneho tvaru do 0.35 px
+    [ OK ] vsechny obrysy uzavrene, pocet 1
+    [ OK ] orientace: vnejsi CCW, otvory CW
+    DXF: 1 POLYLINE, 2 VERTEX, 2 s bulge (v pameti 2 oblouku), max rozdil po nacteni 0,00000 mm, polomeru 0,00000 mm, netecnost po zaokrouhleni 0,0000 st.
+    [ OK ] DXF obsahuje stejne entity, oblouky a polomery; tecnost po zaokrouhleni do 0,01 st.
+== kruh_sum (12 ms)
+    primek 0, oblouku 2, rohu 0, ZLOMU (netecnych napojeni) 0, kratkych (<1 px) 0, segmentu celkem 2
+    polomery: 100.01, 100.01
+    odchylka od skutecneho tvaru: max 0,010 px (zpet 0,010), prumer 0,009 px; max uhel tecneho napojeni 0,0000 st.
+    diagnostika: CAD 1, nahradni 0, hladky 0; primek 0, oblouku 2, rohu 0, zlomu 0, kratkych 0; odchylka max 0.221 px, prumer 0.050 px; max netecnost 0.0000 st.; pred optimalizaci 0 primek, 4 oblouku, 0 rohu, max 0.221 px; kruznic 1; sum hrany 0.052 px; tolerance 0.900 px
+    [ OK ] ocekavano 0 primek, 2 oblouku, 0 rohu
+    [ OK ] celych kruznic (2 pulkruhy): 1, ocekavano 1
+    [ OK ] kruznice stred 120,120 R100: odchylka stredu 0.002 px, polomeru 0.009 px
+TAB|kruh_sum|0|2|0|1|0.010
+    [ OK ] zadne netecne zlomy mimo ostre rohy
+    [ OK ] zadne kratke useky
+    [ OK ] odchylka od skutecneho tvaru do 0.5 px
+    [ OK ] vsechny obrysy uzavrene, pocet 1
+    [ OK ] orientace: vnejsi CCW, otvory CW
+    DXF: 1 POLYLINE, 2 VERTEX, 2 s bulge (v pameti 2 oblouku), max rozdil po nacteni 0,00000 mm, polomeru 0,00000 mm, netecnost po zaokrouhleni 0,0000 st.
+    [ OK ] DXF obsahuje stejne entity, oblouky a polomery; tecnost po zaokrouhleni do 0,01 st.
+== elipsa_110x80 (158 ms)
+    primek 0, oblouku 5, rohu 0, ZLOMU (netecnych napojeni) 0, kratkych (<1 px) 0, segmentu celkem 5
+    polomery: 139.75, 65.42, 137.68, 64.24, 97.11
+    odchylka od skutecneho tvaru: max 0,568 px (zpet 0,568), prumer 0,243 px; max uhel tecneho napojeni 0,0000 st.
+    diagnostika: CAD 1, nahradni 0, hladky 0; primek 0, oblouku 5, rohu 0, zlomu 0, kratkych 0; odchylka max 0.583 px, prumer 0.242 px; max netecnost 0.0000 st.; pred optimalizaci 0 primek, 5 oblouku, 0 rohu, max 0.594 px; kruznic 0; sum hrany 0.038 px; tolerance 0.900 px
+    [ OK ] ocekavano 0 ostrych rohu
+    [ OK ] celych kruznic (2 pulkruhy): 0, ocekavano 0
+    [ OK ] tvar neni nahrazen kruznici: 5 oblouku (aspon 4)
+TAB|elipsa_110x80|0|5|0|0|0.568
+    [ OK ] zadne netecne zlomy mimo ostre rohy
+    [ OK ] zadne kratke useky
+    [ OK ] odchylka od skutecneho tvaru do 0.9 px
+    [ OK ] vsechny obrysy uzavrene, pocet 1
+    [ OK ] orientace: vnejsi CCW, otvory CW
+    DXF: 1 POLYLINE, 5 VERTEX, 5 s bulge (v pameti 5 oblouku), max rozdil po nacteni 0,00000 mm, polomeru 0,00000 mm, netecnost po zaokrouhleni 0,0000 st.
+    [ OK ] DXF obsahuje stejne entity, oblouky a polomery; tecnost po zaokrouhleni do 0,01 st.
+== elipsa_103x100 (127 ms)
+    primek 0, oblouku 4, rohu 0, ZLOMU (netecnych napojeni) 0, kratkych (<1 px) 0, segmentu celkem 4
+    polomery: 97.99, 104.86, 97.78, 105.03
+    odchylka od skutecneho tvaru: max 0,097 px (zpet 0,097), prumer 0,031 px; max uhel tecneho napojeni 0,0000 st.
+    diagnostika: CAD 1, nahradni 0, hladky 0; primek 0, oblouku 4, rohu 0, zlomu 0, kratkych 0; odchylka max 0.105 px, prumer 0.034 px; max netecnost 0.0000 st.; pred optimalizaci 0 primek, 4 oblouku, 0 rohu, max 0.174 px; kruznic 0; sum hrany 0.017 px; tolerance 0.900 px; temer kruznice (potrebna tolerance px): 1.89
+    [ OK ] ocekavano 0 ostrych rohu
+    [ OK ] celych kruznic (2 pulkruhy): 0, ocekavano 0
+    [ OK ] tvar neni nahrazen kruznici: 4 oblouku (aspon 3)
+TAB|elipsa_103x100|0|4|0|0|0.097
+    [ OK ] zadne netecne zlomy mimo ostre rohy
+    [ OK ] zadne kratke useky
+    [ OK ] odchylka od skutecneho tvaru do 0.9 px
+    [ OK ] vsechny obrysy uzavrene, pocet 1
+    [ OK ] orientace: vnejsi CCW, otvory CW
+    DXF: 1 POLYLINE, 4 VERTEX, 4 s bulge (v pameti 4 oblouku), max rozdil po nacteni 0,00000 mm, polomeru 0,00000 mm, netecnost po zaokrouhleni 0,0000 st.
+    [ OK ] DXF obsahuje stejne entity, oblouky a polomery; tecnost po zaokrouhleni do 0,01 st.
+== kruh_nepravidelny (398 ms)
+    primek 1, oblouku 10, rohu 0, ZLOMU (netecnych napojeni) 0, kratkych (<1 px) 0, segmentu celkem 11
+    polomery: 78.29, 140.30, 78.40, 140.40, 78.60, 141.85, 78.73, 142.34, 80.00, 133.90
+    odchylka od skutecneho tvaru: max 0,140 px (zpet 0,160), prumer 0,039 px; max uhel tecneho napojeni 0,0000 st.
+    diagnostika: CAD 1, nahradni 0, hladky 0; primek 1, oblouku 10, rohu 0, zlomu 0, kratkych 0; odchylka max 0.161 px, prumer 0.043 px; max netecnost 0.0000 st.; pred optimalizaci 0 primek, 5 oblouku, 0 rohu, max 1.686 px; kruznic 0; sum hrany 0.049 px; tolerance 0.900 px; temer kruznice (potrebna tolerance px): 1.82
+    [ OK ] ocekavano 0 ostrych rohu
+    [ OK ] celych kruznic (2 pulkruhy): 0, ocekavano 0
+    [ OK ] tvar neni nahrazen kruznici: 10 oblouku (aspon 5)
+TAB|kruh_nepravidelny|1|10|0|0|0.160
+    [ OK ] zadne netecne zlomy mimo ostre rohy
+    [ OK ] zadne kratke useky
+    [ OK ] odchylka od skutecneho tvaru do 0.9 px
+    [ OK ] vsechny obrysy uzavrene, pocet 1
+    [ OK ] orientace: vnejsi CCW, otvory CW
+    DXF: 1 POLYLINE, 11 VERTEX, 10 s bulge (v pameti 10 oblouku), max rozdil po nacteni 0,00000 mm, polomeru 0,00000 mm, netecnost po zaokrouhleni 0,0000 st.
+    [ OK ] DXF obsahuje stejne entity, oblouky a polomery; tecnost po zaokrouhleni do 0,01 st.
+== pulkruh_R100 (8 ms)
+    primek 1, oblouku 1, rohu 2, ZLOMU (netecnych napojeni) 0, kratkych (<1 px) 0, segmentu celkem 2
+    polomery: 100.00
+    odchylka od skutecneho tvaru: max 0,004 px (zpet 0,004), prumer 0,004 px; max uhel tecneho napojeni 0,0000 st.
+    diagnostika: CAD 1, nahradni 0, hladky 0; primek 1, oblouku 1, rohu 2, zlomu 0, kratkych 0; odchylka max 0.040 px, prumer 0.008 px; max netecnost 0.0000 st.; pred optimalizaci 1 primek, 2 oblouku, 2 rohu, max 0.040 px; kruznic 0; sum hrany 0.012 px; tolerance 0.900 px
+    [ OK ] ocekavano 1 primek, 1 oblouku, 2 rohu
+TAB|pulkruh_R100|1|1|2|0|0.004
+    [ OK ] polomery R100 (+-1 %, min. 0,35 px)
+    [ OK ] zadne netecne zlomy mimo ostre rohy
+    [ OK ] zadne kratke useky
+    [ OK ] odchylka od skutecneho tvaru do 0.35 px
+    [ OK ] vsechny obrysy uzavrene, pocet 1
+    [ OK ] orientace: vnejsi CCW, otvory CW
+    DXF: 1 POLYLINE, 2 VERTEX, 1 s bulge (v pameti 1 oblouku), max rozdil po nacteni 0,00000 mm, polomeru 0,00000 mm, netecnost po zaokrouhleni 0,0000 st.
+    [ OK ] DXF obsahuje stejne entity, oblouky a polomery; tecnost po zaokrouhleni do 0,01 st.
+== kapsle_R50 (28 ms)
+    primek 2, oblouku 2, rohu 0, ZLOMU (netecnych napojeni) 0, kratkych (<1 px) 0, segmentu celkem 4
+    polomery: 50.00, 50.00
+    odchylka od skutecneho tvaru: max 0,011 px (zpet 0,011), prumer 0,007 px; max uhel tecneho napojeni 0,0000 st.
+    diagnostika: CAD 1, nahradni 0, hladky 0; primek 2, oblouku 2, rohu 0, zlomu 0, kratkych 0; odchylka max 0.045 px, prumer 0.005 px; max netecnost 0.0000 st.; pred optimalizaci 2 primek, 4 oblouku, 0 rohu, max 0.045 px; kruznic 0; sum hrany 0.009 px; tolerance 0.900 px
+    [ OK ] ocekavano 2 primek, 2 oblouku, 0 rohu
+TAB|kapsle_R50|2|2|0|0|0.011
+    [ OK ] polomery R50, R50 (+-1 %, min. 0,35 px)
+    [ OK ] zadne netecne zlomy mimo ostre rohy
+    [ OK ] zadne kratke useky
+    [ OK ] odchylka od skutecneho tvaru do 0.35 px
+    [ OK ] vsechny obrysy uzavrene, pocet 1
+    [ OK ] orientace: vnejsi CCW, otvory CW
+    DXF: 1 POLYLINE, 4 VERTEX, 2 s bulge (v pameti 2 oblouku), max rozdil po nacteni 0,00000 mm, polomeru 0,00000 mm, netecnost po zaokrouhleni 0,0000 st.
+    [ OK ] DXF obsahuje stejne entity, oblouky a polomery; tecnost po zaokrouhleni do 0,01 st.
+== L_profil_R30 (12 ms)
+    primek 6, oblouku 1, rohu 5, ZLOMU (netecnych napojeni) 0, kratkych (<1 px) 0, segmentu celkem 7
+    polomery: 30.04
+    odchylka od skutecneho tvaru: max 0,017 px (zpet 0,017), prumer 0,008 px; max uhel tecneho napojeni 0,0000 st.
+    diagnostika: CAD 1, nahradni 0, hladky 0; primek 6, oblouku 1, rohu 5, zlomu 0, kratkych 0; odchylka max 0.041 px, prumer 0.001 px; max netecnost 0.0000 st.; pred optimalizaci 6 primek, 1 oblouku, 5 rohu, max 0.041 px; kruznic 0; sum hrany 0.003 px; tolerance 0.900 px
+    [ OK ] ocekavano 6 primek, 1 oblouku, 5 rohu
+TAB|L_profil_R30|6|1|5|0|0.017
+    [ OK ] polomery R30 (+-1 %, min. 0,35 px)
+    [ OK ] zadne netecne zlomy mimo ostre rohy
+    [ OK ] zadne kratke useky
+    [ OK ] odchylka od skutecneho tvaru do 0.35 px
+    [ OK ] vsechny obrysy uzavrene, pocet 1
+    [ OK ] orientace: vnejsi CCW, otvory CW
+    DXF: 1 POLYLINE, 7 VERTEX, 1 s bulge (v pameti 1 oblouku), max rozdil po nacteni 0,00000 mm, polomeru 0,00000 mm, netecnost po zaokrouhleni 0,0000 st.
+    [ OK ] DXF obsahuje stejne entity, oblouky a polomery; tecnost po zaokrouhleni do 0,01 st.
+== hvezda (12 ms)
+    primek 10, oblouku 0, rohu 10, ZLOMU (netecnych napojeni) 0, kratkych (<1 px) 0, segmentu celkem 10
+    polomery: 
+    odchylka od skutecneho tvaru: max 0,006 px (zpet 0,004), prumer 0,002 px; max uhel tecneho napojeni 0,0000 st.
+    diagnostika: CAD 1, nahradni 0, hladky 0; primek 10, oblouku 0, rohu 10, zlomu 0, kratkych 0; odchylka max 0.632 px, prumer 0.013 px; max netecnost 0.0000 st.; pred optimalizaci 11 primek, 1 oblouku, 10 rohu, max 0.632 px; kruznic 0; sum hrany 0.011 px; tolerance 0.900 px
+    [ OK ] ocekavano 10 primek, 0 oblouku, 10 rohu
+TAB|hvezda|10|0|10|0|0.006
+    [ OK ] zadne netecne zlomy mimo ostre rohy
+    [ OK ] zadne kratke useky
+    [ OK ] odchylka od skutecneho tvaru do 0.35 px
+    [ OK ] vsechny obrysy uzavrene, pocet 1
+    [ OK ] orientace: vnejsi CCW, otvory CW
+    DXF: 1 POLYLINE, 10 VERTEX, 0 s bulge (v pameti 0 oblouku), max rozdil po nacteni 0,00000 mm, polomeru 0,00000 mm, netecnost po zaokrouhleni 0,0000 st.
+    [ OK ] DXF obsahuje stejne entity, oblouky a polomery; tecnost po zaokrouhleni do 0,01 st.
+== list (127 ms)
+    primek 0, oblouku 4, rohu 2, ZLOMU (netecnych napojeni) 0, kratkych (<1 px) 0, segmentu celkem 4
+    polomery: 309.13, 178.08, 255.99, 198.48
+    odchylka od skutecneho tvaru: max 0,863 px (zpet 0,807), prumer 0,152 px; max uhel tecneho napojeni 0,0000 st.
+    diagnostika: CAD 1, nahradni 0, hladky 0; primek 0, oblouku 4, rohu 2, zlomu 0, kratkych 0; odchylka max 0.632 px, prumer 0.145 px; max netecnost 0.0000 st.; pred optimalizaci 0 primek, 4 oblouku, 2 rohu, max 0.632 px; kruznic 0; sum hrany 0.025 px; tolerance 0.900 px
+    [ OK ] ocekavano 2 ostrych rohu
+TAB|list|0|4|2|0|0.863
+    [ OK ] zadne netecne zlomy mimo ostre rohy
+    [ OK ] zadne kratke useky
+    [ OK ] odchylka od skutecneho tvaru do 0.9 px
+    [ OK ] vsechny obrysy uzavrene, pocet 1
+    [ OK ] orientace: vnejsi CCW, otvory CW
+    DXF: 1 POLYLINE, 4 VERTEX, 4 s bulge (v pameti 4 oblouku), max rozdil po nacteni 0,00000 mm, polomeru 0,00000 mm, netecnost po zaokrouhleni 0,0000 st.
+    [ OK ] DXF obsahuje stejne entity, oblouky a polomery; tecnost po zaokrouhleni do 0,01 st.
+== maly_roh_R4 (10 ms)
+    primek 4, oblouku 1, rohu 3, ZLOMU (netecnych napojeni) 0, kratkych (<1 px) 0, segmentu celkem 5
+    polomery: 4.31
+    odchylka od skutecneho tvaru: max 0,128 px (zpet 0,123), prumer 0,044 px; max uhel tecneho napojeni 0,0000 st.
+    diagnostika: CAD 1, nahradni 0, hladky 0; primek 4, oblouku 1, rohu 3, zlomu 0, kratkych 0; odchylka max 0.034 px, prumer 0.000 px; max netecnost 0.0000 st.; pred optimalizaci 4 primek, 1 oblouku, 4 rohu, max 1.133 px; kruznic 0; sum hrany 0.000 px; tolerance 0.900 px
+    [ OK ] ocekavano 4 primek, 1 oblouku, 3 rohu
+TAB|maly_roh_R4|4|1|3|0|0.128
+    [ OK ] polomery R4 (+-1 %, min. 0,35 px)
+    [ OK ] zadne netecne zlomy mimo ostre rohy
+    [ OK ] zadne kratke useky
+    [ OK ] odchylka od skutecneho tvaru do 0.35 px
+    [ OK ] vsechny obrysy uzavrene, pocet 1
+    [ OK ] orientace: vnejsi CCW, otvory CW
+    DXF: 1 POLYLINE, 5 VERTEX, 1 s bulge (v pameti 1 oblouku), max rozdil po nacteni 0,00000 mm, polomeru 0,00000 mm, netecnost po zaokrouhleni 0,0000 st.
+    [ OK ] DXF obsahuje stejne entity, oblouky a polomery; tecnost po zaokrouhleni do 0,01 st.
+== ctverec_ostry (5 ms)
+    primek 4, oblouku 0, rohu 4, ZLOMU (netecnych napojeni) 0, kratkych (<1 px) 0, segmentu celkem 4
+    polomery: 
+    odchylka od skutecneho tvaru: max 0,000 px (zpet 0,000), prumer 0,000 px; max uhel tecneho napojeni 0,0000 st.
+    diagnostika: CAD 1, nahradni 0, hladky 0; primek 4, oblouku 0, rohu 4, zlomu 0, kratkych 0; odchylka max 0.000 px, prumer 0.000 px; max netecnost 0.0000 st.; pred optimalizaci 4 primek, 0 oblouku, 4 rohu, max 0.000 px; kruznic 0; sum hrany 0.000 px; tolerance 0.900 px
+    [ OK ] ocekavano 4 primek, 0 oblouku, 4 rohu
+TAB|ctverec_ostry|4|0|4|0|0.000
+    [ OK ] zadne netecne zlomy mimo ostre rohy
+    [ OK ] zadne kratke useky
+    [ OK ] odchylka od skutecneho tvaru do 0.35 px
+    [ OK ] vsechny obrysy uzavrene, pocet 1
+    [ OK ] orientace: vnejsi CCW, otvory CW
+    DXF: 1 POLYLINE, 4 VERTEX, 0 s bulge (v pameti 0 oblouku), max rozdil po nacteni 0,00000 mm, polomeru 0,00000 mm, netecnost po zaokrouhleni 0,0000 st.
+    [ OK ] DXF obsahuje stejne entity, oblouky a polomery; tecnost po zaokrouhleni do 0,01 st.
+== ctverec_pootoceny (5 ms)
+    primek 4, oblouku 0, rohu 4, ZLOMU (netecnych napojeni) 0, kratkych (<1 px) 0, segmentu celkem 4
+    polomery: 
+    odchylka od skutecneho tvaru: max 0,003 px (zpet 0,003), prumer 0,002 px; max uhel tecneho napojeni 0,0000 st.
+    diagnostika: CAD 1, nahradni 0, hladky 0; primek 4, oblouku 0, rohu 4, zlomu 0, kratkych 0; odchylka max 0.035 px, prumer 0.016 px; max netecnost 0.0000 st.; pred optimalizaci 4 primek, 0 oblouku, 4 rohu, max 0.035 px; kruznic 0; sum hrany 0.017 px; tolerance 0.900 px
+    [ OK ] ocekavano 4 primek, 0 oblouku, 4 rohu
+TAB|ctverec_pootoceny|4|0|4|0|0.003
+    [ OK ] zadne netecne zlomy mimo ostre rohy
+    [ OK ] zadne kratke useky
+    [ OK ] odchylka od skutecneho tvaru do 0.35 px
+    [ OK ] vsechny obrysy uzavrene, pocet 1
+    [ OK ] orientace: vnejsi CCW, otvory CW
+    DXF: 1 POLYLINE, 4 VERTEX, 0 s bulge (v pameti 0 oblouku), max rozdil po nacteni 0,00000 mm, polomeru 0,00000 mm, netecnost po zaokrouhleni 0,0000 st.
+    [ OK ] DXF obsahuje stejne entity, oblouky a polomery; tecnost po zaokrouhleni do 0,01 st.
+== mezikruzi (15 ms)
+    primek 0, oblouku 4, rohu 0, ZLOMU (netecnych napojeni) 0, kratkych (<1 px) 0, segmentu celkem 4
+    polomery: 120.00, 120.00, 59.99, 59.99
+    odchylka od skutecneho tvaru: max 0,007 px (zpet 0,007), prumer 0,005 px; max uhel tecneho napojeni 0,0000 st.
+    diagnostika: CAD 2, nahradni 0, hladky 0; primek 0, oblouku 4, rohu 0, zlomu 0, kratkych 0; odchylka max 0.040 px, prumer 0.013 px; max netecnost 0.0000 st.; pred optimalizaci 0 primek, 8 oblouku, 0 rohu, max 0.040 px; kruznic 2; sum hrany 0.015 px; tolerance 0.900 px
+    [ OK ] ocekavano 0 primek, 4 oblouku, 0 rohu
+    [ OK ] celych kruznic (2 pulkruhy): 2, ocekavano 2
+    [ OK ] kruznice stred 140,140 R120: odchylka stredu 0.000 px, polomeru 0.004 px
+    [ OK ] kruznice stred 140,140 R60: odchylka stredu 0.000 px, polomeru 0.007 px
+TAB|mezikruzi|0|4|0|2|0.007
+    [ OK ] polomery R120, R120, R60, R60 (+-1 %, min. 0,35 px)
+    [ OK ] zadne netecne zlomy mimo ostre rohy
+    [ OK ] zadne kratke useky
+    [ OK ] odchylka od skutecneho tvaru do 0.35 px
+    [ OK ] vsechny obrysy uzavrene, pocet 2
+    [ OK ] orientace: vnejsi CCW, otvory CW
+    DXF: 2 POLYLINE, 4 VERTEX, 4 s bulge (v pameti 4 oblouku), max rozdil po nacteni 0,00000 mm, polomeru 0,00000 mm, netecnost po zaokrouhleni 0,0000 st.
+    [ OK ] DXF obsahuje stejne entity, oblouky a polomery; tecnost po zaokrouhleni do 0,01 st.
+== deska_s_otvorem (16 ms)
+    primek 8, oblouku 4, rohu 4, ZLOMU (netecnych napojeni) 0, kratkych (<1 px) 0, segmentu celkem 12
+    polomery: 20.06, 20.06, 20.06, 20.06
+    odchylka od skutecneho tvaru: max 0,027 px (zpet 0,027), prumer 0,015 px; max uhel tecneho napojeni 0,0000 st.
+    diagnostika: CAD 2, nahradni 0, hladky 0; primek 8, oblouku 4, rohu 4, zlomu 0, kratkych 0; odchylka max 0.035 px, prumer 0.001 px; max netecnost 0.0000 st.; pred optimalizaci 8 primek, 4 oblouku, 4 rohu, max 0.035 px; kruznic 0; sum hrany 0.006 px; tolerance 0.900 px
+    [ OK ] ocekavano 8 primek, 4 oblouku, 4 rohu
+TAB|deska_s_otvorem|8|4|4|0|0.027
+    [ OK ] polomery R20, R20, R20, R20 (+-1 %, min. 0,35 px)
+    [ OK ] zadne netecne zlomy mimo ostre rohy
+    [ OK ] zadne kratke useky
+    [ OK ] odchylka od skutecneho tvaru do 0.35 px
+    [ OK ] vsechny obrysy uzavrene, pocet 2
+    [ OK ] orientace: vnejsi CCW, otvory CW
+    DXF: 2 POLYLINE, 12 VERTEX, 4 s bulge (v pameti 4 oblouku), max rozdil po nacteni 0,00000 mm, polomeru 0,00000 mm, netecnost po zaokrouhleni 0,0000 st.
+    [ OK ] DXF obsahuje stejne entity, oblouky a polomery; tecnost po zaokrouhleni do 0,01 st.
+== deska_otvory (31 ms)
+    primek 6, oblouku 8, rohu 4, ZLOMU (netecnych napojeni) 0, kratkych (<1 px) 0, segmentu celkem 14
+    polomery: 24.99, 24.99, 24.99, 24.99, 14.97, 14.97, 30.00, 30.00
+    odchylka od skutecneho tvaru: max 0,026 px (zpet 0,026), prumer 0,015 px; max uhel tecneho napojeni 0,0000 st.
+    diagnostika: CAD 5, nahradni 0, hladky 0; primek 6, oblouku 8, rohu 4, zlomu 0, kratkych 0; odchylka max 0.045 px, prumer 0.004 px; max netecnost 0.0000 st.; pred optimalizaci 6 primek, 16 oblouku, 4 rohu, max 0.045 px; kruznic 3; sum hrany 0.014 px; tolerance 0.900 px
+    [ OK ] ocekavano 6 primek, 8 oblouku, 4 rohu
+    [ OK ] celych kruznic (2 pulkruhy): 3, ocekavano 3
+    [ OK ] kruznice stred 90,90 R25: odchylka stredu 0.000 px, polomeru 0.015 px
+    [ OK ] kruznice stred 200,90 R25: odchylka stredu 0.000 px, polomeru 0.015 px
+    [ OK ] kruznice stred 320,90 R15: odchylka stredu 0.000 px, polomeru 0.026 px
+TAB|deska_otvory|6|8|4|3|0.026
+    [ OK ] polomery R25, R25, R25, R25, R15, R15, R30, R30 (+-1 %, min. 0,35 px)
+    [ OK ] zadne netecne zlomy mimo ostre rohy
+    [ OK ] zadne kratke useky
+    [ OK ] odchylka od skutecneho tvaru do 0.35 px
+    [ OK ] vsechny obrysy uzavrene, pocet 5
+    [ OK ] orientace: vnejsi CCW, otvory CW
+    DXF: 5 POLYLINE, 14 VERTEX, 8 s bulge (v pameti 8 oblouku), max rozdil po nacteni 0,00000 mm, polomeru 0,00000 mm, netecnost po zaokrouhleni 0,0000 st.
+    [ OK ] DXF obsahuje stejne entity, oblouky a polomery; tecnost po zaokrouhleni do 0,01 st.
+    nejhorsi mista: 0.82 px @ 910,968; 0.76 px @ 949,527; 0.69 px @ 978,528; 0.67 px @ 997,529; 0.66 px @ 1023,529; 0.66 px @ 1160,132
+== motivy (534 ms)
+    obrysu 12, primek 46, oblouku 37 (z toho skoro rovnych 0), rohu 33, ZLOMU 0, kratkych (<1 px) 0, segmentu 83
+    odchylka od hrany obrazku: prumer 0,095 px, 95 % 0,391, 99 % 0,628, max 0,816
+    diagnostika: CAD 12, nahradni 0, hladky 0; primek 46, oblouku 37, rohu 33, zlomu 0, kratkych 0; odchylka max 0.828 px, prumer 0.093 px; max netecnost 0.0000 st.; pred optimalizaci 45 primek, 46 oblouku, 39 rohu, max 1.759 px; kruznic 1; sum hrany 0.059 px; tolerance 0.900 px; temer kruznice (potrebna tolerance px): 2.10, 1.61
+      obrys @ 288,199 (400x209 px): primek 4, oblouku 2, rohu 2
+      obrys @ 729,199 (242x203 px): primek 0, oblouku 5, rohu 0
+      obrys @ 1164,201 (168x298 px): primek 0, oblouku 4, rohu 0
+      obrys @ 1189,202 (21x152 px): primek 0, oblouku 2, rohu 0, KRUZNICE
+      obrys @ 1007,491 (147x46 px): primek 3, oblouku 1, rohu 3
+      obrys @ 271,546 (256x152 px): primek 2, oblouku 2, rohu 0
+      obrys @ 700,540 (269x243 px): primek 6, oblouku 1, rohu 5
+      obrys @ 1006,582 (146x108 px): primek 5, oblouku 5, rohu 2
+      obrys @ 1144,552 (85x169 px): primek 8, oblouku 2, rohu 6
+      obrys @ 1330,552 (144x169 px): primek 6, oblouku 0, rohu 6
+      obrys @ 416,853 (348x310 px): primek 10, oblouku 2, rohu 8
+      obrys @ 968,865 (279x310 px): primek 2, oblouku 11, rohu 1
+TAB|motivy|46|37|33|1|0.305
+    DXF: 12 POLYLINE, 83 VERTEX, 37 s bulge (v pameti 37 oblouku), max rozdil po nacteni 0,00000 mm, polomeru 0,00000 mm, netecnost po zaokrouhleni 0,0000 st.
+    [ OK ] DXF obsahuje stejne entity, oblouky a polomery; tecnost po zaokrouhleni do 0,01 st.
+VAROVANI KVALITY: logo_lisplast.png: nesplnena tolerance nebo pruseciky. Uspesny test DXF neni potvrzenim kvality kontury.
+    nejhorsi mista: 0.88 px @ 868,388; 0.65 px @ 730,319; 0.61 px @ 579,302; 0.58 px @ 815,349; 0.55 px @ 329,349; 0.55 px @ 494,299
+== logo_lisplast (140 ms)
+    obrysu 18, primek 111, oblouku 40 (z toho skoro rovnych 1), rohu 79, ZLOMU 0, kratkych (<1 px) 0, segmentu 151
+    odchylka od hrany obrazku: prumer 0,062 px, 95 % 0,243, 99 % 0,395, max 0,880
+    diagnostika: CAD 18, nahradni 0, hladky 0; primek 111, oblouku 40, rohu 79, zlomu 0, kratkych 0; odchylka max 0.911 px, prumer 0.056 px; max netecnost 0.0000 st.; pred optimalizaci 91 primek, 46 oblouku, 101 rohu, max 1.924 px; kruznic 0; sum hrany 0.145 px; tolerance 0.900 px; prvku mimo toleranci 1; temer kruznice (potrebna tolerance px): 3.52, 2.06
+      obrys @ 271,283 (117x132 px): primek 6, oblouku 0, rohu 6
+      obrys @ 413,206 (828x413 px): primek 8, oblouku 1, rohu 8
+      obrys @ 359,283 (32x132 px): primek 4, oblouku 0, rohu 4
+      obrys @ 460,283 (133x132 px): primek 12, oblouku 7, rohu 5
+      obrys @ 613,283 (134x132 px): primek 10, oblouku 4, rohu 6
+      obrys @ 756,283 (118x132 px): primek 6, oblouku 0, rohu 6
+      obrys @ 904,283 (166x132 px): primek 7, oblouku 0, rohu 7
+      obrys @ 903,324 (55x51 px): primek 3, oblouku 0, rohu 3
+      obrys @ 1063,283 (134x132 px): primek 12, oblouku 8, rohu 4
+      obrys @ 1203,283 (121x132 px): primek 8, oblouku 0, rohu 8
+      obrys @ 876,397 (38x33 px): primek 7, oblouku 8, rohu 4
+      obrys @ 912,409 (10x9 px): primek 4, oblouku 0, rohu 4
+      obrys @ 943,397 (27x33 px): primek 5, oblouku 3, rohu 2
+      obrys @ 973,409 (10x9 px): primek 4, oblouku 0, rohu 4
+      obrys @ 1009,397 (42x33 px): primek 3, oblouku 5, rohu 0
+      obrys @ 1010,397 (22x18 px): primek 4, oblouku 4, rohu 0
+      obrys @ 1046,409 (10x9 px): primek 4, oblouku 0, rohu 4
+      obrys @ 1147,394 (140x39 px): primek 4, oblouku 0, rohu 4
+TAB|logo_lisplast|111|40|79|0|0.348
+    DXF: 18 POLYLINE, 151 VERTEX, 40 s bulge (v pameti 40 oblouku), max rozdil po nacteni 0,00000 mm, polomeru 0,00000 mm, netecnost po zaokrouhleni 0,0000 st.
+    [ OK ] DXF obsahuje stejne entity, oblouky a polomery; tecnost po zaokrouhleni do 0,01 st.
+VAROVANI KVALITY: strom.webp: nesplnena tolerance nebo pruseciky. Uspesny test DXF neni potvrzenim kvality kontury.
+    nejhorsi mista: 2.72 px @ 822,636; 2.54 px @ 680,821; 2.50 px @ 521,679; 2.17 px @ 373,664; 2.09 px @ 852,332; 2.08 px @ 657,880
+== strom (4599 ms)
+    obrysu 24, primek 127, oblouku 362 (z toho skoro rovnych 6), rohu 143, ZLOMU 0, kratkych (<1 px) 0, segmentu 489
+    odchylka od hrany obrazku: prumer 0,136 px, 95 % 0,401, 99 % 0,864, max 2,722
+    diagnostika: CAD 24, nahradni 0, hladky 0; primek 127, oblouku 362, rohu 143, zlomu 0, kratkych 0; odchylka max 40.434 px, prumer 0.125 px; max netecnost 0.0000 st.; pred optimalizaci 95 primek, 324 oblouku, 199 rohu, max 43.152 px; kruznic 0; sum hrany 0.140 px; tolerance 0.900 px; PRUSECIKY 1/0; prvku mimo toleranci 57
+      obrys @ 690,58 (343x116 px): primek 2, oblouku 11, rohu 1
+      obrys @ 356,211 (293x228 px): primek 2, oblouku 10, rohu 2
+      obrys @ 997,228 (264x278 px): primek 1, oblouku 18, rohu 4
+      obrys @ 620,258 (168x64 px): primek 2, oblouku 13, rohu 1
+      obrys @ 829,364 (81x51 px): primek 1, oblouku 4, rohu 3
+      obrys @ 912,336 (119x48 px): primek 2, oblouku 6, rohu 3
+      obrys @ 1173,336 (36x63 px): primek 2, oblouku 4, rohu 2
+      obrys @ 293,419 (325x182 px): primek 5, oblouku 13, rohu 5
+      obrys @ 537,503 (210x173 px): primek 9, oblouku 19, rohu 9
+      obrys @ 485,599 (162x164 px): primek 6, oblouku 15, rohu 6
+      obrys @ 564,557 (11x16 px): primek 0, oblouku 4, rohu 2
+      obrys @ 744,616 (30x26 px): primek 0, oblouku 5, rohu 1
+      obrys @ 781,584 (87x50 px): primek 1, oblouku 4, rohu 3
+      obrys @ 866,584 (56x50 px): primek 1, oblouku 4, rohu 3
+      obrys @ 331,678 (92x38 px): primek 2, oblouku 5, rohu 3
+      obrys @ 640,756 (1276x782 px): primek 77, oblouku 177, rohu 70
+      obrys @ 673,675 (27x137 px): primek 2, oblouku 9, rohu 1
+      obrys @ 687,806 (47x59 px): primek 1, oblouku 9, rohu 5
+      obrys @ 505,898 (34x113 px): primek 3, oblouku 8, rohu 3
+      obrys @ 650,826 (19x63 px): primek 1, oblouku 4, rohu 3
+      obrys @ 77,1094 (80x30 px): primek 1, oblouku 4, rohu 2
+      obrys @ 613,1019 (42x93 px): primek 2, oblouku 4, rohu 4
+      obrys @ 998,1109 (162x47 px): primek 2, oblouku 9, rohu 3
+      obrys @ 713,1153 (100x36 px): primek 2, oblouku 3, rohu 4
+TAB|strom|127|362|143|0|1.063
+    DXF: 24 POLYLINE, 489 VERTEX, 362 s bulge (v pameti 362 oblouku), max rozdil po nacteni 0,00000 mm, polomeru 0,00000 mm, netecnost po zaokrouhleni 0,0000 st.
+    [ OK ] DXF obsahuje stejne entity, oblouky a polomery; tecnost po zaokrouhleni do 0,01 st.
+== jen usecky: primek 18, oblouku 0; CAD 1, nahradni 0, hladky 0; primek 4, oblouku 2, rohu 2, zlomu 0, kratkych 0; odchylka max 0.042 px, prumer 0.001 px; max netecnost 0.0000 st.; pred optimalizaci 4 primek, 2 oblouku, 2 rohu, max 0.042 px; kruznic 0; sum hrany 0.004 px; tolerance 0.900 px
+    [ OK ] volba bez oblouku: CAD obrys rozlozeny na usecky
+== hladky (Potrace): CAD 0, nahradni 0, hladky 1; primek 6, oblouku 4, rohu 4, zlomu 6, kratkych 0; odchylka max 0.859 px, prumer 0.120 px; max netecnost 8.3283 st.; pred optimalizaci 0 primek, 0 oblouku, 0 rohu, max 0.000 px; kruznic 0; sum hrany 0.000 px; tolerance 0.000 px
+    [ OK ] hladky proklad je v diagnostice oznaceny
+== tecky: CAD 1, nahradni 0, hladky 0; primek 4, oblouku 0, rohu 4, zlomu 0, kratkych 0; odchylka max 0.000 px, prumer 0.000 px; max netecnost 0.0000 st.; pred optimalizaci 4 primek, 0 oblouku, 4 rohu, max 0.000 px; kruznic 0; sum hrany 0.000 px; tolerance 0.900 px
+    [ OK ] kazdy obrys je bud CAD, nebo oznaceny nahradni (s duvodem)
+== prilis maly obrys: vysledek null, duvod: obrys je příliš malý
+    [ OK ] neuspesna CAD rekonstrukce vraci duvod
+== motivy, tolerance 0.2 mm: primek 47, oblouku 45, rohu 35, kruznic 0; max 0.184 mm (pouzita tolerance 0.200 mm), pruseciku 0
+    [ OK ] tolerance 0.2 mm dodrzena, bez pruseciku a zlomu
+== motivy, tolerance 0.5 mm: primek 46, oblouku 34, rohu 36, kruznic 1; max 0.395 mm (pouzita tolerance 0.500 mm), pruseciku 0
+    [ OK ] tolerance 0.5 mm dodrzena, bez pruseciku a zlomu
+== motivy, tolerance 0.8 mm: primek 44, oblouku 27, rohu 37, kruznic 3; max 0.663 mm (pouzita tolerance 0.800 mm), pruseciku 0
+    [ OK ] tolerance 0.8 mm dodrzena, bez pruseciku a zlomu
+== motivy, tolerance 1.5 mm: primek 46, oblouku 27, rohu 37, kruznic 3; max 0.728 mm (pouzita tolerance 1.500 mm), pruseciku 0
+    [ OK ] tolerance 1.5 mm dodrzena, bez pruseciku a zlomu
+VSECHNY KONTROLY PROSLY
+OK | Rozpoznani odlisnosti pozadi / prahu / kresby
+OK | Invertovany obrazek a prah
+OK | Stredova cara gravirovani
+OK | Prazdny obrazek vraci chybu
+OK | Velikost a posun obrysu v mm
+  nove testovni DXF: 17 kontur, 30 oblouku
+OK | DXF export, zpetne nacteni a oprava
+OK | DXF bez oblouku
+OK | Vyber, souradnice a zruseni vyberu
+OK | Presun, zpet a znovu
+OK | Vystredeni, roh desky a presah
+OK | Otoceni 90 stupnu
+OK | Zrcadleni X i Y
+OK | Meritko 200 procent
+OK | Mazani bodu a obrysu
+OK | Presny radius rohu
+OK | Srovnani X a Y podle bodu
+OK | Start do bodu a obraceni smeru
+OK | Vlozeni bodu do oblouku zachova radius a plochu
+OK | Spojeni koncu otevrenych car
+OK | Uzavreni otevrene kontury
+OK | Odsazeni ven/dovnitr, zaobleni a slouceni
+OK | Tri karty a vychozi zamek ve formulari
+OK | Vykresleni souradnic vybraneho bodu
+OK | SVG export ma skutecne oblouky a jednotky mm
+OK | PNG/JPEG/BMP/GIF/TIFF import
+OK | Neznamy soubor hlasi chybu importu
+OK | Zoom a posun nahledu nemeni CAD souradnice
+OK | Nerealna tolerance se nezvysi a hlasi nesplneni
+OK | Pocatek ve stredu a posun
+OK | Vypnuta vrstva a cache rozpoznani
+OK | Kontrola sirky tahu a mezer pro frezu
+OK | DXF LINE ARC CIRCLE a hlaseni nepodporovane entity
+OK | Obrys z obrazku a DXF lze nacist do formulare editoru
+  MERENI: mm/px=0.440029, max=0.278254 mm, tolerance=0.396026 mm, CAD 17, nahradni 0, hladky 0; primek 37, oblouku 30, rohu 32, zlomu 0, kratkych 0; odchylka max 0.632 px, prumer 0.032 px; max netecnost 0.0000 st.; pred optimalizaci 38 primek, 48 oblouku, 33 rohu, max 1.330 px; kruznic 6; sum hrany 0.038 px; tolerance 0.900 px
+OK | Tolerance a topologie noveho testovaciho obrazu
+SOUHRN: 34 proslo, 0 selhalo
+OK: Novy editor ma zamknuty posun
+OK: Vyber a tazeni bodu pod zamkem nemeni geometrii
+OK: Sipky vcetne modifikatoru pod zamkem nic neposunou
+OK: Vyber hrany pod zamkem neposune cely obrys
+OK: Odemknute sipky posouvaji a ukladaji krok zpet
+OK: Odemknute tazeni funguje
+OK: Zapnuti zamku zastavi i probihajici tazeni

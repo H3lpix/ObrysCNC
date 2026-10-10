@@ -1,0 +1,37 @@
+OK | Rozpoznani odlisnosti pozadi / prahu / kresby
+OK | Invertovany obrazek a prah
+OK | Stredova cara gravirovani
+OK | Prazdny obrazek vraci chybu
+OK | Velikost a posun obrysu v mm
+  nove testovni DXF: 17 kontur, 30 oblouku
+OK | DXF export, zpetne nacteni a oprava
+OK | DXF bez oblouku
+OK | Vyber, souradnice a zruseni vyberu
+OK | Presun, zpet a znovu
+OK | Vystredeni, roh desky a presah
+OK | Otoceni 90 stupnu
+OK | Zrcadleni X i Y
+OK | Meritko 200 procent
+OK | Mazani bodu a obrysu
+OK | Presny radius rohu
+OK | Srovnani X a Y podle bodu
+OK | Start do bodu a obraceni smeru
+OK | Vlozeni bodu do oblouku zachova radius a plochu
+OK | Spojeni koncu otevrenych car
+OK | Uzavreni otevrene kontury
+OK | Odsazeni ven/dovnitr, zaobleni a slouceni
+OK | Tri karty a vychozi zamek ve formulari
+OK | Vykresleni souradnic vybraneho bodu
+OK | SVG export ma skutecne oblouky a jednotky mm
+OK | PNG/JPEG/BMP/GIF/TIFF import
+OK | Neznamy soubor hlasi chybu importu
+OK | Zoom a posun nahledu nemeni CAD souradnice
+OK | Nerealna tolerance se nezvysi a hlasi nesplneni
+OK | Pocatek ve stredu a posun
+OK | Vypnuta vrstva a cache rozpoznani
+OK | Kontrola sirky tahu a mezer pro frezu
+OK | DXF LINE ARC CIRCLE a hlaseni nepodporovane entity
+OK | Obrys z obrazku a DXF lze nacist do formulare editoru
+  MERENI: mm/px=0.440029, max=0.278254 mm, tolerance=0.396026 mm, CAD 17, nahradni 0, hladky 0; primek 37, oblouku 30, rohu 32, zlomu 0, kratkych 0; odchylka max 0.632 px, prumer 0.032 px; max netecnost 0.0000 st.; pred optimalizaci 38 primek, 48 oblouku, 33 rohu, max 1.330 px; kruznic 6; sum hrany 0.038 px; tolerance 0.900 px
+OK | Tolerance a topologie noveho testovaciho obrazu
+SOUHRN: 34 proslo, 0 selhalo

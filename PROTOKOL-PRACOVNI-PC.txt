@@ -1,0 +1,24 @@
+PROTOKOL TESTŮ NA PRACOVNÍM PC
+Datum:
+Windows / .NET:
+Verze Xilog Plus:
+Stroj:
+
+Spuštění ObrysCNC a všechny tři karty:
+Výběr dvou bodů, rádius, zámek posunu:
+Převod testovacího PNG a hlášení geometrie:
+Uložení a kontrola DXF:
+
+Testovaný DXF:
+DX / DY / DZ:
+BX / BY:
+Měřítko / strana / pracovní oblast:
+Reference system – zrcadlení X / Y, směr oblouků:
+Souřadnice známého bodu a vzdálenost od okraje:
+Skutečný počet oblouků / poloměry:
+Orientace a směr obrysů / otvorů:
+Výsledek původní tlapky v srdci:
+Přiložené snímky nastavení a výsledku:
+Další závady:
+
+Obrábění nebylo součástí tohoto testu:

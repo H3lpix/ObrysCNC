@@ -1,0 +1,24 @@
+chyba: -
+ostry pravy uhel: bodu 4, plocha 9999,811
+      0,000    0,000  bulge 0,0000
+    100,000    0,000  bulge 0,0000
+    100,433   99,563  bulge 0,0000
+      0,000  100,000  bulge 0,0000
+chyba: -
+pravy uhel + R10: bodu 5, plocha 9978,351
+      0,000    0,000  bulge 0,0000
+    100,000    0,000  bulge 0,0000
+    100,389   89,563  bulge 0,4142
+     90,433   99,607  bulge 0,0000
+      0,000  100,000  bulge 0,0000
+   (ocekavana plocha ~ ctverec s jednim rohem R10: 9978,540)
+chyba: -
+jeden vrchol R5: bodu 5, plocha 1494,635
+      0,000    0,000  bulge 0,0000
+     50,000    0,000  bulge 0,0000
+     50,000   25,000  bulge 0,4142
+     45,000   30,000  bulge 0,0000
+      0,000   30,000  bulge 0,0000
+   (ocekavano 1494,635)
+R40: Rádius 40 mm je na tak krátké hrany moc velký (max. ≈ 30 mm).
+srovnani X: bod 3 = 12,5, 30,0 (ocekavano 12.5, 30.0)

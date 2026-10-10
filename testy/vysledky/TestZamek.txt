@@ -1,0 +1,7 @@
+OK: Novy editor ma zamknuty posun
+OK: Vyber a tazeni bodu pod zamkem nemeni geometrii
+OK: Sipky vcetne modifikatoru pod zamkem nic neposunou
+OK: Vyber hrany pod zamkem neposune cely obrys
+OK: Odemknute sipky posouvaji a ukladaji krok zpet
+OK: Odemknute tazeni funguje
+OK: Zapnuti zamku zastavi i probihajici tazeni

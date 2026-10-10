@@ -1,0 +1,205 @@
+﻿OBRYS CNC – obrázek -> DXF pro Xilog
+=====================================
+
+Spuštění
+--------
+Stačí spustit ObrysCNC.exe. Nic se neinstaluje, funguje na Windows 10 i 11
+(vyžaduje .NET Framework 4.8; dostupnost ověřte na pracovním PC).
+Soubor ObrysCNC.exe lze zkopírovat na jiný počítač (např. k CNC) a spustit tam.
+Nastavení si program pamatuje (ukládá se do %APPDATA%\ObrysCNC\nastaveni.ini).
+
+Obrázky i DXF soubory můžete do okna přetáhnout myší.
+
+
+Karta "Obrázek -> DXF"
+----------------------
+1. Otevřít obrázek… (PNG, JPG, BMP, GIF, TIF, WebP).
+   WebP čte přes kodek Windows – kdyby nešel otevřít, nainstalujte z Microsoft
+   Store "Rozšíření obrázků WebP", nebo obrázek uložte v Malování jako PNG.
+2. Co je tvar:
+     - Vše kromě pozadí: pozadí se pozná podle okraje obrázku, všechno ostatní
+       (jakákoli barva) je tvar. "Min. rozdíl od pozadí" = citlivost.
+       Hrana tvaru leží v půlce přechodu barvy (tvar není ztloustlý).
+     - Tmavé na světlém: tvar je vše tmavší než "Práh jasu".
+       "Invertovat" = tvarem je naopak světlá část.
+     - Kresba / fotka: porovnává bod s okolím – i fotka kresby se stínem
+       nebo nerovným světlem (jen čáry, ne velké plochy).
+   Výstup:
+     - Obrys tvaru: dráha kolem každého tvaru.
+     - Středová čára (gravírování): jedna dráha středem každé čáry kresby.
+       Program ukáže typickou šířku čáry = vhodný průměr frézy.
+3. Šířka [mm] – výška se dopočítá (nebo zadejte výšku a dopočítá se šířka).
+   Umístění obrázku = zvolený levý roh nebo střed, Posun X/Y určí jeho polohu.
+   Souřadnice stroje: Y=0 dole (Y nahoru) nebo nahoře (Y dolů).
+4. Kvalita obrysu:
+     - Vyhlazení: vyhladí zubaté hrany obrázku (větší = hladší, zaoblí rohy).
+     - Zjednodušení: povolená odchylka od obrázku v pixelech.
+     - Zaoblení rohů (0–1,33): které zlomy zůstanou ostré a které se zaoblí
+       (jako "alphamax" v Potrace/Inkscape). 0 = vše ostré, 1 = doporučeno,
+       1,33 = vše zaoblené. Zaoblení navazuje na rovné hrany plynule (tečně).
+     - Narovnat hrany: skoro vodorovné/svislé hrany srovná přesně.
+     - Vynechat menší než: smaže drobné skvrny/nečistoty.
+     - Křivky jako oblouky: zaoblení se uloží jako oblouky (plynulejší pohyb stroje).
+5. Průměr frézy: program upozorní, když je fréza širší než nejtenčí místo
+   tvaru nebo nejužší mezera (pak by se detaily nevyfrézovaly).
+6. Uložit DXF…  (volitelně i verze "_bez_oblouku" – jen úsečky, pro případ,
+   že by import oblouky nenačetl).
+
+Náhled: kolečko myši = zoom, tažení = posun, dvojklik = zobrazit celé.
+Zelená tečka a šipka = začátek a směr frézování každého obrysu.
+
+
+Karta "Oprava DXF"
+------------------
+Pro DXF z jiných programů, kde je obrys rozpadlý na kousky:
+  - spojí navazující kousky do uzavřených obrysů,
+  - sjednotí směr (vnější obrysy proti směru hodin, díry po směru),
+  - začátek obrysu dá do rohu (stopa po nájezdu není vidět),
+  - řady krátkých úseček nahradí oblouky.
+Originály se nikdy nepřepisují – výsledky jdou do podsložky "upravene"
+(nebo do zvolené výstupní složky). Vrstvy i poloha výkresu zůstávají.
+V náhledu je modře nový obrys a červeně čárkovaně původní kousky.
+
+
+Karta "Editor DXF"
+------------------
+Úpravy obrysu na imaginární desce (počátek 0,0 = zvolený levý roh desky).
+Obrys sem pošlete tlačítkem "Upravit v editoru ->" z první nebo druhé karty,
+nebo otevřete libovolný DXF ("Otevřít DXF…", případně přetáhněte DXF do okna,
+když je otevřená karta Editor).
+  - Deska: šířka a výška; mřížka se přizpůsobí zoomu.
+  - Kóty: šířka a výška výkresu + vzdálenost od levého a zvoleného Y okraje.
+  - Vystředit / Do rohu (s okrajem): umístění celého výkresu na desce.
+  - Myš: klik na bod = výběr (přesun tažením pouze při vypnutém zámku), klik na čáru = celý obrys,
+    tažení na prázdném místě = výběr obdélníkem, Ctrl/Shift = přidat k výběru,
+    dvojklik na čáru = nový bod, pravé tlačítko / kolečko = posun a zoom.
+  - Klávesy: Delete = smazat body, šipky = posun (Shift 10 mm, Ctrl 0,1 mm),
+    Ctrl+A = vybrat vše, Esc = zrušit výběr, Ctrl+Z / Ctrl+Y = zpět / znovu.
+  - Smazat obrysy, Obrátit směr, Start do bodu (začátek frézování).
+  - Roh z vybraných bodů: tažením obdélníku vyberte body v rohu (zakulacení,
+    zkosení, nepřesný roh) a klikněte "Vytvořit roh s rádiusem". Body se nahradí
+    ostrým rohem v průsečíku navazujících hran (s "Pravý úhel" srovnaným přesně
+    na 90°) a ten se zaoblí zadaným "Rádius rohu" (0 = ostrý roh).
+    Jde to i s jedním vybraným ostrým bodem – jen se zaoblí.
+  - Srovnat X / Y podle bodu: vyberte body, klikněte na tlačítko a pak na bod,
+    podle kterého se mají srovnat (dostanou jeho X, resp. Y). Esc = zrušit.
+  - Transformace (vybrané obrysy, jinak vše): otočit o úhel, změnit měřítko,
+    zrcadlit vodorovně/svisle.
+  - Tvar a odsazení: odsadit ven/dovnitř o vzdálenost (např. poloměr frézy),
+    zaoblit rohy poloměrem, sloučit překrývající se tvary.
+  - Otevřené obrysy: spojit konce v toleranci, uzavřít úsečkou.
+  - Uložit lze jako DXF nebo SVG.
+  - Program upozorní, když výkres přesahuje desku, a při zavření na neuložené změny.
+
+Kóty a deska se ukazují i v náhledu na kartě "Obrázek -> DXF"
+(tlačítko "Vystředit obrys na desce").
+
+
+Způsob prokladu (karta Obrázek -> DXF)
+--------------------------------------
+Věrný (doporučeno) = CAD rekonstrukce: každý obrys se složí jen z přímek
+a kruhových oblouků; algoritmus usiluje o tečné přechody. Sledujte diagnostiku.
+U složitých předloh není bezchybná geometrie zaručena. Ostrý roh
+zůstane jen tam, kde se hrana v obrázku opravdu láme.
+  - rovná hrana = jedna přímka (šum obrázku se srovná),
+  - zaoblení = skutečný oblouk se správným poloměrem (ne řada úseček),
+  - kruh = 2 půlkruhy, drážka = 2 přímky + 2 půlkruhy,
+  - kresby (větve, listy): hladký proklad; u složitých tvarů kontrolujte
+    toleranci a průsečíky. Strom má v dosavadním testu známé problémy.
+Pod nastavením se ukazuje kontrola geometrie: počet přímek, oblouků a rohů,
+odchylka od obrázku (px a mm) a zda je vše opravdu CAD. Když některý obrys
+nejde složit z přímek a tečných oblouků, program použije náhradní proklad
+a ŘEKNE TO (oranžové upozornění s důvodem) – nic se neskrývá.
+Po uložení DXF program soubor znovu načte a ukáže, co v něm opravdu je
+(počet oblouků a úseček).
+Zúžené špičky tahů (hroty) skládá ostře podle obou hran – v rozmazaném
+obrázku bývá hrot o 1–2 px kratší, proto tam odchylka vychází větší.
+Hladký (Potrace): velmi hladké křivky jako v Inkscapu, méně přesné.
+Přesnost nikdy nepřekoná rozlišení obrázku: čím větší obrázek, tím přesnější
+obrys (logo 1264 px široké na 1000 mm = 0,8 mm na pixel). Malá zaoblení
+(do ~5 px) vycházejí kvůli vyhlazení o ~0,3 px větší.
+V editoru (odsazení, zaoblení, sloučení) se výsledek skládá stejně – odsazený
+roh je přesný oblouk.
+
+
+Co program zapisuje
+-------------------
+DXF verze R12, POLYLINE (oblouky jako "bulge"), hodnoty souřadnic v mm.
+Zachovává uzavřené i otevřené kontury. Import nastavte na milimetry a měřítko 1.
+
+
+Úprava programu
+---------------
+Zdrojové kódy jsou ve složce src. Po změně spusťte sestavit.cmd,
+který vytvoří nový ObrysCNC.exe (používá překladač, který je součástí Windows).
+
+Optimalizace CAD geometrie (10. 10. 2026)
+---------------------------------------
+Max. odchylka [mm]: 0 = automatická hodnota podle pixelové tolerance
+ a velikosti výsledku. Nenulová hodnota zadává mez v mm na desce.
+Zadaná mez se automaticky nezvyšuje. Pokud ji nelze splnit, program
+zobrazí upozornění; zejména pod asi 0,3 px nelze spolehlivě určit tvar.
+Kvalita obrysu uvádí přímky a oblouky před/po, kružnice, rohy, odchylku
+ a netečná napojení. U ostrých špiček měření zohledňuje vyhlazení rastru;
+nejde o záruku fyzické přesnosti původního dílu.
+Kruhy a otvory se společně prokládají kružnicí; přijmou se pouze v toleranci.
+Elipsy a nepravidelné kruhy si ponechají potřebný počet oblouků.
+DXF R12 POLYLINE zachovává bulge; export se znovu načítá a kontroluje.
+Při vypnutí oblouků jsou výsledkem aproximované úsečky, ne ARC geometrie.
+Před obráběním ověřte DXF v Xilog Plus, zejména půlkruhy a jejich směr.
+Výsledky a tabulka před/po jsou v testy\OVERENI.md.
+
+Ochrana před nechtěným posunem v editoru
+--------------------------------------
+V části Úpravy je volba "Zamknout posun bodů (myš a šipky)".
+Při spuštění je zapnutá: klikání vybírá body nebo obrys, ale tažení
+myší ani šipky souřadnice nezmění. Pro záměrný přesun zámek vypněte.
+Zapnutí zámku zastaví i probíhající tažení. Posun pohledu a výběr fungují.
+Zámek chrání přesouvání; tlačítka pro srovnání os, vystředění a další
+záměrné úpravy zůstávají dostupná. Souřadnice výběru vidíte na ploše.
+
+Automatické ověření: se zavřenou aplikací spusťte testy\overit.cmd.
+Vygeneruje testovací obrázky a ověří geometrii, DXF, funkce a zámek bodů.
+Podrobný aktuální souhrn: testy\SOUHRN-TESTU-2026-10-10.md.
+Úspěšný test DXF potvrzuje uložení geometrie; varování kvality obrysu
+(tolerance nebo průsečíky) je nutné posoudit samostatně.
+
+Souřadnice různých strojů
+------------------------
+Volba "Souřadnice stroje" je společná na všech třech kartách a pamatuje se.
+  - Y=0 dole · Y nahoru: X=0 vlevo, Y=0 na spodním okraji desky.
+  - Y=0 nahoře · Y dolů: X=0 vlevo, Y=0 na horním okraji desky,
+    kladné Y směrem dolů dovnitř desky.
+Výchozí je dosavadní spodní počátek; starší nastavení fungují beze změny.
+Pro horní počátek zadejte skutečnou výšku desky. DXF souřadnice se přepočtou
+Y nahoře = výška desky - Y dole. U oblouků se přepočte znaménko bulge;
+zůstávají skutečné oblouky R12 POLYLINE. Správný výsledek na stroji závisí
+na souhlasné interpretaci souřadnic v cílovém CAM. Import Xilog není potvrzen.
+Přepnutí v editoru body neposune, pouze změní zobrazované a exportované
+souřadnice. Šipky stále posouvají podle směru na obrazovce, když je zámek vypnutý.
+"Do rohu" používá zvolený levý horní nebo dolní roh. "Vystředit" funguje v obou.
+U obrázku se Posun Y měří od zvolené strany desky; přepnutí proto může změnit
+umístění obrázku se stejným Posunem Y. Volba Střed znamená střed obrázku
+v zadaných souřadnicích stroje. SVG zůstává vizuálním výkresem, nikoli programem stroje.
+
+Před načtením DXF nastavte souřadnice jeho zdrojového stroje a výšku desky.
+DXF R12 sám neumí spolehlivě sdělit, zda je Y=0 nahoře nebo dole.
+Převod mezi stroji: načtěte DXF v jeho původní soustavě do editoru,
+potom přepněte na cílový stroj a uložte nový DXF. Pro obě soustavy použijte
+stejnou skutečnou výšku desky. Dávková oprava čte i zapisuje zvolenou soustavu.
+Před prvním obráběním na dalším stroji ověřte počátek a směr Y v jeho CAM.
+Testy a ukázkové DXF: testy\vysledky\TestSouradniceStroje.txt,
+stroj-Y-dole.dxf a stroj-Y-nahore.dxf ve stejné složce.
+
+RÁDIUS VYBRANÉHO SPOJE V EDITORU
+Vyberte první bod kliknutím a druhý pomocí Ctrl + kliknutí.
+Panel souřadnic zobrazí R v mm, pokud jsou body konci jednoho oblouku.
+Hodnota vychází ze skutečné geometrie oblouku včetně DXF bulge.
+U přímky nebo nesousedních bodů panel vysvětlí, proč rádius není uveden.
+Uzavřený obrys se dvěma body má dva spoje; panel uvede oba samostatně.
+Výběr funguje i při zapnutém zámku posunu a nemění geometrii.
+
+PŘENOS NA PRACOVNÍ PC A AKTUÁLNÍ STAV
+Rozbalte celý balíček. Začněte souborem CTI-ME-NEJDRIV.txt.
+Známé problémy: AKTUALNI-STAV.txt. Testování CAM: POSTUP-TESTU-XILOG.txt.
+Pro výsledky pracovního PC použijte PROTOKOL-PRACOVNI-PC.txt.

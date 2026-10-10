@@ -1,0 +1,5 @@
+otevrenych 0, typicka sirka 3,50 mm
+PRESNOST (px obrazku): prumer 0,062, 95 % 0,243, 99 % 0,395, max 0,880  (bodu hrany 4934)
+bodu uvnitr tahu: 85/132, stredovost (1 = presne uprostred) 0,11
+obrysu 18, segmentu 151 (obl 40), 150,0x49,1
+segmentu kratsich nez 1 px: 0

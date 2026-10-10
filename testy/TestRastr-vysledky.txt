@@ -1,0 +1,6 @@
+odsazeni +5                  obrysu 1, plocha    6575,9 (ocekavano    6578,5, odchylka -0,04 %), rozsah X -4,99..104,99 Y -5,00..54,99, segmentu 8
+odsazeni -5                  obrysu 1, plocha    3598,2 (ocekavano    3600,0, odchylka -0,05 %), rozsah X 5,01..94,99 Y 5,00..44,99, segmentu 4
+zaobleni r=10                obrysu 1, plocha    4911,6 (ocekavano    4914,2, odchylka -0,05 %), rozsah X 0,02..99,98 Y 0,00..49,98, segmentu 8
+slouceni 2 ctvercu           obrysu 1, plocha     175,0 (ocekavano     175,0, odchylka 0,00 %), rozsah X 0,00..15,00 Y 0,00..15,00, segmentu 8
+ctverec s dirou +2           obrysu 2, plocha    9515,3 (ocekavano    9516,6, odchylka -0,01 %), rozsah X -2,00..102,00 Y -2,00..102,00, segmentu 12
+logo odsazeni +3 mm: 17 obrysu, 8289 ms

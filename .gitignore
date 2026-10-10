@@ -1,0 +1,11 @@
+balicky/
+testy/vysledky/*.exe
+testy/vysledky/format-*.img
+*.pdb
+*.tmp
+*.user
+.vs/
+bin/
+obj/
+nastaveni.ini
+testy/*.exe

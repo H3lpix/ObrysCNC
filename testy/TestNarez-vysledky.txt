@@ -1,0 +1,11 @@
+cas 11 ms, desek 2, kusu 30, vyuziti 71,0 %, hrany 30,1 m, nevejde: Moc velký (3000 × 500)
+chyb: 0
+rezny rozmer dvirek: 712 x 592 (ocekavano 712 x 592)
+1. Ořez okrajů 10 mm.
+2. Pruhy podélně (přes celou délku desky): 98, 98, 558, 558, 558, 98 mm.
+   Pruh 1 (98 mm): sloupce 2400 mm
+   Pruh 2 (98 mm): sloupce 2400 mm
+   Pruh 3 (558 mm): sloupce 720, 720, 720, 564 mm
+   Pruh 4 (558 mm): sloupce 720, 720, 720, 564 mm
+   Pruh 5 (558 mm): sloupce 720, 720, 564, 564 mm
+   Pruh 6 (98 mm): sloupce 564, 564, 564, 564 mm

@@ -1,0 +1,55 @@
+﻿OBRYSCNC – STAV VERZE PRO TESTY, 10. 10. 2026
+===========================================
+
+HOTOVO
+Tři karty: Obrázek -> DXF, Oprava DXF, Editor DXF.
+Nářezový plán byl na žádost odstraněn; archiv jeho kódu není součástí sestavení.
+CAD rekonstrukce a optimalizace přímek a kruhových oblouků, rozpoznání kružnic,
+diagnostika odchylek, náhradního prokladu a kontrola uloženého DXF.
+DXF R12 POLYLINE s bulge; export SVG; nastavitelná tolerance v mm.
+Editor: souřadnice výběru, rozdíly X/Y, rádius mezi dvěma sousedními body,
+zámek posunu myší a šipkami zapnutý při spuštění, undo/redo a geometrické úpravy.
+Společná volba spodního/horního počátku Y. Přepočet bodů i znamének bulge
+je matematicky otestovaný, interpretace cílovým CAM vyžaduje ověření.
+C# 5, .NET Framework 4.8, sestavení sestavit.cmd bez nových závislostí.
+
+OVĚŘENÍ
+Poslední dosavadní běhy: 164 geometrických kontrol, 34 funkčních scénářů,
+7 kontrol zámku, 11 scénářů souřadnic stroje a 11 kontrol výběru rádiusu prošlo.
+Aktuální opakovaný běh pro přenosový balíček je v testy\vysledky\Balicek-testy.txt.
+Výpisy TestGeom, TestFunkce, TestZamek, TestSouradniceStroje a TestRadiusVyberu
+obsahují konkrétní výsledky. Souhrn a historická tabulka před/po jsou v testy.
+Úspěšné uložení/načtení DXF není potvrzením kvality všech rastrových předloh.
+
+ZNÁMÉ PROBLÉMY – NEJSOU VYDÁVÁNY ZA OPRAVENÉ
+1. Xilog Plus: uživatelský DXF tlapky v srdci se vykresluje nad deskou.
+   Deska 1520 x 1310 mm; DXF rozsah X 69,466 až 1450,513 mm,
+   Y 65,179 až 1244,874 mm (včetně oblouků); 6 kontur, 68 vrcholů,
+   58 nenulových bulge. Soubor nemá záporné Y a rozměrově se vejde.
+   Snímek ukazuje nesoulad umístění/souřadnic při importu. Pravděpodobnou
+   příčinou je referenční soustava, směr Y nebo posun importu; přesný převod
+   zatím není potvrzen. Chybí snímky General settings a Reference system.
+   Výšku desky nelze označit za příčinu: aktuálně se shoduje na 1310 mm.
+   Neprovádět pokusné automatické otáčení ani pokládat horní Y za hotový
+   strojový profil pro Xilog. Postup diagnostiky je v POSTUP-TESTU-XILOG.txt.
+2. Logo Lisplast: interní maximum 0,911 px proti toleranci 0,900 px;
+   jeden prvek překračuje toleranci v dosavadním testu.
+3. Strom: jeden samoprůsečík, 57 prvků mimo toleranci a interní maximum
+   40,434 px. Jednosměrné vzorkování dává menší odchylku; rozdíl měření
+   a problematickou konturu je nutné samostatně prošetřit.
+4. Odsazení a slučování v editoru využívá rastrovou metodu; nejde o čistě
+   analytické operace. Naměřené odchylky plochy byly asi 0,01–0,05 %.
+5. Neověřeny všechny kombinace DPI, souborových dialogů, drag-and-drop,
+   dávkového ukládání a obnovení nastavení na pracovním PC.
+6. Nebylo ověřeno obrábění na CNC. Aplikace nic neposílá na stroj.
+
+DALŠÍ POSTUP
+Nejprve ověřit spuštění a editor na pracovním PC. Potom zaznamenat nastavení
+importu Xilog, zkontrolovat velikost, umístění, směr a rádiusy testovacích DXF.
+Teprve po vyřešení souřadnic lze schválit soubor pro další přípravu obrábění.
+U organických předloh posuzovat varování, průsečíky a toleranci jednotlivě.
+
+OPAKOVANÝ BĚH PŘENOSOVÉHO BALÍČKU
+Testy proběhly přímo z této samostatné složky s návratovým kódem 0.
+Geometrické kontroly, 34 funkčních scénářů, 7 kontrol zámku, 11 scénářů
+souřadnic a 11 kontrol rádiusu prošly. Známá varování kvality zůstávají.

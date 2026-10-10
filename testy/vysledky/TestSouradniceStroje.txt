@@ -1,0 +1,12 @@
+OK | Dolni pocatek zachovava puvodni geometrii
+OK | Horní pocatek: Y=H-Y, X beze zmeny, bulge opacne
+OK | Dvoji prevod je identita a vstup se nemeni
+OK | Oblouky zachovaji radius, uhel a odrazene stredy
+OK | DXF obou soustav obsahuje spravne skutecne oblouky
+OK | DXF bez oblouku a ruzne vysky desky
+OK | Oprava horniho DXF vraci stejnou fyzickou geometrii
+OK | Editor zobrazuje souradnice stroje bez pohybu bodu
+OK | Do rohu pouzije horni okraj a lze vratit zpet
+OK | Umisteni obrazku od horniho i spodniho okraje
+OK | Spolecna volba vsech tri karet a import horniho DXF
+SOUHRN: 11 proslo, 0 selhalo
