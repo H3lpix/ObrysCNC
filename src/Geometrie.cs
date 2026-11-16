@@ -52,6 +52,8 @@ namespace ObrysCNC
         public static ObloukInfo Oblouk(P a, P b, double bulge)
         {
             double th = 4 * Math.Atan(bulge), c = Vzd(a, b);
+            // shodne koncove body (nebo nulovy bulge): oblouk neexistuje, vratit bod misto NaN
+            if (c < 1e-12 || Math.Abs(bulge) < 1e-15) return new ObloukInfo { Cx = a.X, Cy = a.Y, R = 0, A0 = 0, Sw = 0 };
             double r = c / (2 * Math.Sin(Math.Abs(th) / 2));
             double mx = (a.X + b.X) / 2, my = (a.Y + b.Y) / 2;
             double d = r * Math.Cos(Math.Abs(th) / 2);
@@ -549,6 +551,36 @@ namespace ObrysCNC
                     minx = Math.Min(minx, p.X); maxx = Math.Max(maxx, p.X);
                     miny = Math.Min(miny, p.Y); maxy = Math.Max(maxy, p.Y);
                 }
+        }
+
+        // Presny rozsah bez vzorkovani: koncove body a krajni body oblouku (0, 90, 180, 270 st.), pokud na oblouku lezi.
+        public static void RozsahPresny(IEnumerable<Obrys> obrysy, out double minx, out double miny, out double maxx, out double maxy)
+        {
+            minx = miny = double.MaxValue;
+            maxx = maxy = double.MinValue;
+            foreach (var o in obrysy)
+            {
+                foreach (var p in o.Pts)
+                {
+                    minx = Math.Min(minx, p.X); maxx = Math.Max(maxx, p.X);
+                    miny = Math.Min(miny, p.Y); maxy = Math.Max(maxy, p.Y);
+                }
+                for (int i = 0; i < o.PocetSegmentu && i < o.B.Count; i++)
+                {
+                    if (Math.Abs(o.B[i]) < 1e-12) continue;
+                    var ob = Oblouk(o.Pts[i], o.KonecSegmentu(i), o.B[i]);
+                    if (ob.R <= 0) continue;
+                    for (int k = 0; k < 4; k++)
+                    {
+                        double u = k * Math.PI / 2;
+                        double rel = ob.Sw > 0 ? Mod2Pi(u - ob.A0) : Mod2Pi(ob.A0 - u);
+                        if (rel >= Math.Abs(ob.Sw)) continue;
+                        double x = ob.Cx + (k == 0 ? ob.R : k == 2 ? -ob.R : 0), y = ob.Cy + (k == 1 ? ob.R : k == 3 ? -ob.R : 0);
+                        minx = Math.Min(minx, x); maxx = Math.Max(maxx, x);
+                        miny = Math.Min(miny, y); maxy = Math.Max(maxy, y);
+                    }
+                }
+            }
         }
 
         // Pocet krizeni hran: v ramci jednoho obrysu (samoprusecik) a mezi obrysy. Oblouky se rozlozi

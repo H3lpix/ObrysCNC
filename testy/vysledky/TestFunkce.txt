@@ -34,4 +34,15 @@ OK | DXF LINE ARC CIRCLE a hlaseni nepodporovane entity
 OK | Obrys z obrazku a DXF lze nacist do formulare editoru
   MERENI: mm/px=0.440029, max=0.278254 mm, tolerance=0.396026 mm, CAD 17, nahradni 0, hladky 0; primek 37, oblouku 30, rohu 32, zlomu 0, kratkych 0; odchylka max 0.632 px, prumer 0.032 px; max netecnost 0.0000 st.; pred optimalizaci 38 primek, 48 oblouku, 33 rohu, max 1.330 px; kruznic 6; sum hrany 0.038 px; tolerance 0.900 px
 OK | Tolerance a topologie noveho testovaciho obrazu
-SOUHRN: 34 proslo, 0 selhalo
+OK | DXF zrcadlena POLYLINE (230=-1) ma oblouk na stejne strane jako ARC
+OK | Nazev vrstvy s diakritikou se ulozi citelne
+OK | Oblouk s nulovou tetivou nevraci NaN
+OK | Presny rozsah vcetne oblouku
+OK | Cele o 90 stupnu: presna velikost, roh na miste, zpet
+OK | Cele o 90 stupnu zachova radius oblouku
+OK | Presun obrysu mysi i pri zamku, velikost beze zmeny
+OK | Otoceni mysi zachova plochu a jde vratit
+OK | Vychozi nastroj vyber: zamek dal brani posunu
+OK | Body do jednoho oblouku
+OK | Body, ktere oblouk netvori, zustanou beze zmeny
+SOUHRN: 45 proslo, 0 selhalo

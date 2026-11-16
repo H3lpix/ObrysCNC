@@ -52,7 +52,7 @@ namespace ObrysCNC
         CheckBox chUzka;
         NumericUpDown nUhel, nMeritko, nOdsazeni, nPolomer, nTolSpoje;
         CheckBox chZachovat;
-        NumericUpDown nRadiusRohu;
+        NumericUpDown nRadiusRohu, nOdchOblouku;
         CheckBox chPravyUhel;
         NumericUpDown nCitlivost, nPrah, nSirka, nVyska, nPosunX, nPosunY, nSigma, nTol, nTolMm, nNarovnat, nMinPlocha, nFreza;
         CheckBox chInvert, chOblouky, chBezOblouku, chZobrObrazek, chZobrBody;
@@ -874,6 +874,10 @@ namespace ObrysCNC
             DvaTlacitka(t,
                 Tlacitko("Vystředit", tip, "Posune celý výkres doprostřed desky.", () => editor.Vystredit()),
                 Tlacitko("Do rohu", tip, "Posune výkres k levému rohu zvolenému pro stroj s nastaveným okrajem.", () => editor.DoRohu((double)nOkraj.Value)));
+            string tip90 = "Otočí CELÝ výkres přesně o 90°. Velikost se nemění – šířka a výška se jen prohodí,\ntakže rozměry od zákazníka zůstanou zachované (na rozdíl od změny měřítka v procentech).\nRoh výkresu u počátku desky zůstane na místě.";
+            DvaTlacitka(t,
+                Tlacitko("↺ Celé o 90° vlevo", tip, tip90, () => editor.OtocCele90(true)),
+                Tlacitko("↻ Celé o 90° vpravo", tip, tip90, () => editor.OtocCele90(false)));
 
             Nadpis(t, "Úpravy");
             var chZamekPosunu = new CheckBox { Text = "Zamknout posun bodů (myš a šipky)", AutoSize = true, Checked = true };
@@ -913,6 +917,19 @@ namespace ObrysCNC
                 });
             btnRoh.Dock = DockStyle.Fill;
             CelyRadek(t, btnRoh);
+
+            Nadpis(t, "Oblouk z vybraných bodů");
+            nOdchOblouku = Cislo("odchoblouku", 0.001m, 10, 0.1m, 3, 0.05m, false);
+            Radek(t, "Povolená odchylka [mm]", nOdchOblouku, tip, "O kolik se smí nový oblouk odchýlit od původního tvaru.\nKdyž by se odchýlil víc, nic se nezmění a program napíše, o kolik.");
+            var btnOblouk = Tlacitko("Sloučit body do jednoho oblouku", tip,
+                "Když je oblouk zbytečně rozdělený na mnoho bodů: vyberte tažením obdélníku jeho body (aspoň 3 sousední).\nBody mezi prvním a posledním se nahradí jedním obloukem; krajní body zůstanou na místě.",
+                () =>
+                {
+                    string zprava = editor.BodyDoOblouku((double)nOdchOblouku.Value);
+                    if (zprava != null) MessageBox.Show(this, zprava, "Oblouk z bodů", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                });
+            btnOblouk.Dock = DockStyle.Fill;
+            CelyRadek(t, btnOblouk);
 
             Nadpis(t, "Srovnání osy podle bodu");
             Action<bool> srovnej = osaX =>
@@ -979,7 +996,9 @@ namespace ObrysCNC
                        "• tažení na prázdném místě = výběr obdélníkem\n" +
                        "• Ctrl nebo Shift + klik = přidat k výběru\n" +
                        "• dvojklik na čáru = vložit nový bod\n" +
-                       "• přesuny tažením a šipkami fungují jen při vypnutém zámku\n" +
+                       "• přesuny bodů tažením a šipkami fungují jen při vypnutém zámku\n" +
+                       "• nástroj „Přesun obrysů“ nahoře = tažením posunete celý obrys\n" +
+                       "• nástroj „Otáčení“ nahoře = tažením otáčíte, Shift po 15°\n" +
                        "• šipky = posun po obrazovce o 1 mm (Shift 10 mm, Ctrl 0,1 mm)\n" +
                        "• pravé tlačítko / kolečko = posun a zoom pohledu\n" +
                        "• dvojklik na prázdné místo = zobrazit celou desku"
@@ -997,6 +1016,21 @@ namespace ObrysCNC
             listaEd.Controls.Add(btnZpet3);
             listaEd.Controls.Add(btnZnovu3);
             listaEd.Controls.Add(new Label { Text = "Zpět / Znovu  (Ctrl+Z / Ctrl+Y)", AutoSize = true, Margin = Pad(8, 9, 0, 0), ForeColor = Color.DimGray });
+            listaEd.Controls.Add(new Label { Text = "Myš:", AutoSize = true, Margin = Pad(24, 9, 0, 0) });
+            var nastroje = new[]
+            {
+                new { Text = "Výběr bodů", N = Editor.NastrojMysi.Vyber, Tip = "Klik a obdélník vybírají body. Posun bodů hlídá zámek." },
+                new { Text = "Přesun obrysů", N = Editor.NastrojMysi.Presun, Tip = "Tažením myší posunete celý obrys, na který kliknete (Ctrl + klik = přidat další).\nKdyž není nic vybráno a táhnete na prázdném místě, posouvá se celý výkres.\nVelikost se nemění." },
+                new { Text = "Otáčení", N = Editor.NastrojMysi.Otoceni, Tip = "Tažením myší otáčíte vybrané obrysy (nebo celý výkres) kolem jejich středu.\nShift = po 15°, tedy i přesně 90°. Velikost se nemění. Úhel je vidět dole ve stavovém řádku." }
+            };
+            foreach (var na in nastroje)
+            {
+                var volba = na;
+                var rb = new RadioButton { Text = volba.Text, Appearance = Appearance.Button, AutoSize = true, Checked = volba.N == Editor.NastrojMysi.Vyber, Margin = Pad(4, 2, 0, 2), TextAlign = ContentAlignment.MiddleCenter, MinimumSize = new Size(0, S(32)) };
+                rb.CheckedChanged += (s, e) => { if (rb.Checked) { editor.Nastroj = volba.N; editor.Focus(); } };
+                tipSipky.SetToolTip(rb, volba.Tip);
+                listaEd.Controls.Add(rb);
+            }
             split3.Panel2.Controls.Add(editor);
             split3.Panel2.Controls.Add(listaEd);
             AktualizujEditorInfo();

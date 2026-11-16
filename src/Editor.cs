@@ -42,8 +42,24 @@ namespace ObrysCNC
         readonly List<string> zpetPopis = new List<string>(), znovuPopis = new List<string>();
 
         double meritko = 1, ox, oy;
-        enum Rezim { Nic, Pohled, Obdelnik, Tah }
+        enum Rezim { Nic, Pohled, Obdelnik, Tah, TahObrysu, Rotace }
         Rezim rezim;
+
+        // Nastroj mysi: Vyber = body (posun hlida zamek), Presun = tazenim se posouvaji cele obrysy,
+        // Otoceni = tazenim se cele obrysy otaceji kolem sveho stredu. Presun a Otoceni jsou zamerne
+        // zvolene nastroje, proto na ne zamek posunu bodu neplati.
+        public enum NastrojMysi { Vyber, Presun, Otoceni }
+        NastrojMysi nastroj;
+        public NastrojMysi Nastroj
+        {
+            get { return nastroj; }
+            set { nastroj = value; rezim = Rezim.Nic; tahZaloha = null; rotZaklad = null; Invalidate(); }
+        }
+        List<int> tahIds;
+        List<Obrys> rotZaklad;
+        P rotStred;
+        double rotStart, rotUhel;
+        public double UhelOtaceni { get { return rotUhel * 180 / Math.PI; } }
         Point mysPred, obdA, obdB;
         HashSet<long> vyberPred;
         P tahPosledni;
@@ -132,7 +148,7 @@ namespace ObrysCNC
 
         public bool Rozsah(out double minx, out double miny, out double maxx, out double maxy)
         {
-            Geo.Rozsah(Obrysy, out minx, out miny, out maxx, out maxy);
+            Geo.RozsahPresny(Obrysy, out minx, out miny, out maxx, out maxy);
             return Obrysy.Count > 0 && minx <= maxx;
         }
 
@@ -255,8 +271,161 @@ namespace ObrysCNC
         P StredCilu()
         {
             double a, b, c, d;
-            Geo.Rozsah(Cilove().Select(i => Obrysy[i]), out a, out b, out c, out d);
+            Geo.RozsahPresny(Cilove().Select(i => Obrysy[i]), out a, out b, out c, out d);
             return new P((a + c) / 2, (b + d) / 2);
+        }
+
+        // presny cos/sin: u nasobku 90 st. bez zaokrouhlovaci chyby (rozmery se nesmi zmenit ani o tisiciny)
+        static void CosSin(double uhel, out double cs, out double sn)
+        {
+            cs = Math.Cos(uhel); sn = Math.Sin(uhel);
+            if (Math.Abs(cs) < 1e-12) { cs = 0; sn = sn > 0 ? 1 : -1; }
+            else if (Math.Abs(sn) < 1e-12) { sn = 0; cs = cs > 0 ? 1 : -1; }
+        }
+
+        static Obrys Otoceny(Obrys o, P s, double cs, double sn)
+        {
+            return new Obrys
+            {
+                Zavreny = o.Zavreny, Vrstva = o.Vrstva, B = new List<double>(o.B),
+                Pts = o.Pts.Select(p => new P(s.X + (p.X - s.X) * cs - (p.Y - s.Y) * sn, s.Y + (p.X - s.X) * sn + (p.Y - s.Y) * cs)).ToList()
+            };
+        }
+
+        // Otoci CELY vykres presne o 90 st. Velikost se nemeni (sirka a vyska se jen prohodi) a roh vykresu
+        // blize k pocatku desky zustane na miste, takze vykres po otoceni "neodjede".
+        public void OtocCele90(bool doleva)
+        {
+            double a, b, c, d;
+            if (!Rozsah(out a, out b, out c, out d)) return;
+            UlozZpet(null, doleva ? "Otočit celé o 90° vlevo" : "Otočit celé o 90° vpravo");
+            var s = new P((a + c) / 2, (b + d) / 2);
+            Obrysy = Obrysy.Select(o => Otoceny(o, s, 0, doleva ? 1 : -1)).ToList();
+            double a2, b2, c2, d2;
+            Geo.RozsahPresny(Obrysy, out a2, out b2, out c2, out d2);
+            double dx = a - a2, dy = YNahore ? d - d2 : b - b2;
+            Obrysy = Obrysy.Select(o => Geo.Posun(o, dx, dy)).ToList();
+            vyber.Clear();
+            Hlas();
+        }
+
+        // Vybrane sousedni body (aspon 3) nahradi jednim obloukem mezi prvnim a poslednim z nich.
+        // Pouzije se jen kdyz se oblouk od puvodniho tvaru neodchyli vic nez maxOdchylka (mm).
+        public string BodyDoOblouku(double maxOdchylka)
+        {
+            if (vyber.Count == 0) return "Vyberte tažením obdélníku body, které mají tvořit jeden oblouk.";
+            var nove = Kopie(Obrysy);
+            int hotovo = 0, ubylo = 0;
+            double nejOdch = 0;
+            string chyba = null;
+            foreach (int oi in VybraneObrysy())
+            {
+                var o = nove[oi];
+                int n = o.Pts.Count;
+                var vyb = new bool[n];
+                for (int v = 0; v < n; v++) vyb[v] = vyber.Contains(Klic(oi, v));
+                if (o.Zavreny && vyb.All(x => x)) { chyba = "Vybraný je celý obrys – vyberte jen body jednoho oblouku."; continue; }
+                P start = o.Pts[0];
+                if (o.Zavreny)
+                {
+                    // zacit nevybranym bodem, aby zadny usek neprechazel pres zacatek
+                    int s0 = Array.IndexOf(vyb, false);
+                    o.Pts = o.Pts.Skip(s0).Concat(o.Pts.Take(s0)).ToList();
+                    o.B = o.B.Skip(s0).Concat(o.B.Take(s0)).ToList();
+                    vyb = vyb.Skip(s0).Concat(vyb.Take(s0)).ToArray();
+                }
+                var useky = new List<int[]>();
+                for (int i = 0; i < n; )
+                {
+                    if (!vyb[i]) { i++; continue; }
+                    int a = i;
+                    while (i < n && vyb[i]) i++;
+                    useky.Add(new[] { a, i - 1 });
+                }
+                foreach (var u in useky.OrderByDescending(x => x[0]))
+                {
+                    if (u[1] - u[0] < 2) { if (chyba == null) chyba = "Pro sloučení vyberte aspoň 3 sousední body."; continue; }
+                    double odch;
+                    string ch = ObloukVUseku(o, u[0], u[1], maxOdchylka, out odch);
+                    if (ch == null) { hotovo++; ubylo += u[1] - u[0] - 1; nejOdch = Math.Max(nejOdch, odch); } else chyba = ch;
+                }
+                // start frezovani vratit na puvodni bod, pokud v obrysu zustal
+                if (o.Zavreny)
+                {
+                    int si = o.Pts.FindIndex(p => p.X == start.X && p.Y == start.Y);
+                    if (si > 0)
+                    {
+                        o.Pts = o.Pts.Skip(si).Concat(o.Pts.Take(si)).ToList();
+                        o.B = o.B.Skip(si).Concat(o.B.Take(si)).ToList();
+                    }
+                }
+            }
+            if (hotovo == 0) return chyba ?? "Oblouk se nepodařilo vytvořit.";
+            UlozZpet(null, "Body do oblouku");
+            Obrysy = nove;
+            vyber.Clear();
+            Hlas();
+            return string.Format("Hotovo: nových oblouků {0}, ubylo bodů {1}, největší odchylka od původního tvaru {2:0.000} mm.", hotovo, ubylo, nejOdch)
+                + (chyba != null ? "\n\nČást výběru zůstala beze změny: " + chyba : "");
+        }
+
+        static string ObloukVUseku(Obrys o, int a, int b, double maxOdchylka, out double odchylka)
+        {
+            odchylka = 0;
+            P A = o.Pts[a], B = o.Pts[b];
+            double c = Geo.Vzd(A, B);
+            if (c < 1e-6) return "Krajní body výběru leží na sobě – vyberte jen část kružnice.";
+            // puvodni tvar mezi krajnimi body jako husta rada bodu
+            var vz = new List<P>();
+            for (int s = a; s < b; s++)
+            {
+                var r = Geo.Rozloz(o.Pts[s], o.Pts[s + 1], o.B[s], 0.005);
+                vz.AddRange(s == a ? r : r.Skip(1));
+            }
+            // prvni odhad: bod v polovine delky je vrchol oblouku, bulge = 2 * vyska / tetiva
+            double delka = 0;
+            for (int i = 1; i < vz.Count; i++) delka += Geo.Vzd(vz[i - 1], vz[i]);
+            P M = vz[vz.Count / 2];
+            double ujeto = 0;
+            for (int i = 1; i < vz.Count; i++)
+            {
+                double d = Geo.Vzd(vz[i - 1], vz[i]);
+                if (ujeto + d >= delka / 2 && d > 0)
+                {
+                    double t = (delka / 2 - ujeto) / d;
+                    M = new P(vz[i - 1].X + t * (vz[i].X - vz[i - 1].X), vz[i - 1].Y + t * (vz[i].Y - vz[i - 1].Y));
+                    break;
+                }
+                ujeto += d;
+            }
+            double ux = (B.X - A.X) / c, uy = (B.Y - A.Y) / c;
+            double b0 = 2 * ((M.X - (A.X + B.X) / 2) * uy - (M.Y - (A.Y + B.Y) / 2) * ux) / c;
+            Func<double, double> chybaOblouku = bulge =>
+            {
+                double m = 0;
+                foreach (var q in vz) m = Math.Max(m, Geo.VzdalenostKSegmentu(q, A, B, bulge));
+                return m;
+            };
+            // doladeni: zlaty rez kolem odhadu, hleda se nejmensi nejvetsi odchylka
+            double lo = b0 - Math.Max(0.05, 0.25 * Math.Abs(b0)), hi = b0 + Math.Max(0.05, 0.25 * Math.Abs(b0));
+            const double fi = 0.6180339887498949;
+            double x1 = hi - fi * (hi - lo), x2 = lo + fi * (hi - lo), f1 = chybaOblouku(x1), f2 = chybaOblouku(x2);
+            for (int it = 0; it < 50; it++)
+            {
+                if (f1 < f2) { hi = x2; x2 = x1; f2 = f1; x1 = hi - fi * (hi - lo); f1 = chybaOblouku(x1); }
+                else { lo = x1; x1 = x2; f1 = f2; x2 = lo + fi * (hi - lo); f2 = chybaOblouku(x2); }
+            }
+            double nej = (lo + hi) / 2, e0 = chybaOblouku(b0);
+            odchylka = chybaOblouku(nej);
+            if (e0 < odchylka) { nej = b0; odchylka = e0; }
+            if (Math.Abs(nej) < 1e-9) nej = 0;
+            if (Math.Abs(nej) > 20) return "Vybrané body tvoří skoro celou kružnici – vyberte kratší úsek.";
+            if (odchylka > maxOdchylka)
+                return string.Format("Body netvoří jeden oblouk: nejlepší oblouk se od tvaru odchyluje o {0:0.000} mm (povoleno {1:0.000} mm). Vyberte kratší úsek, nebo zvyšte povolenou odchylku.", odchylka, maxOdchylka);
+            o.Pts.RemoveRange(a + 1, b - a - 1);
+            o.B.RemoveRange(a + 1, b - a - 1);
+            o.B[a] = nej;
+            return null;
         }
 
         public void Otoc(double stupne)
@@ -663,7 +832,10 @@ namespace ObrysCNC
             var mysStroje = SouradniceBodu(mysMm);
             string stav = mysUvnitr ? string.Format("X {0:0.0}  Y {1:0.0} mm", mysStroje.X, mysStroje.Y) : "";
             if (vyber.Count > 0) stav += (stav.Length > 0 ? "   ·   " : "") + "vybráno bodů: " + vyber.Count;
-            stav += (stav.Length > 0 ? "   ·   " : "") + (PosunZamcen ? "Posun bodů zamčen" : "Posun bodů povolen");
+            string nastrojText = nastroj == NastrojMysi.Presun ? "Nástroj: přesun obrysů myší"
+                : nastroj == NastrojMysi.Otoceni ? (rezim == Rezim.Rotace ? string.Format("Otáčení: {0:0.0}°  (Shift = po 15°)", UhelOtaceni) : "Nástroj: otáčení myší (Shift = po 15°)")
+                : (PosunZamcen ? "Posun bodů zamčen" : "Posun bodů povolen");
+            stav += (stav.Length > 0 ? "   ·   " : "") + nastrojText;
             if (srovnani != 0)
                 using (var tucne = new Font(Font, FontStyle.Bold))
                     TextRenderer.DrawText(g, string.Format("Klikněte na bod, podle kterého se srovná {0} vybraných bodů (Esc = zrušit)", srovnani == 1 ? "X" : "Y"),
@@ -797,6 +969,7 @@ namespace ObrysCNC
             if (e.Button == MouseButtons.Right || e.Button == MouseButtons.Middle) { rezim = Rezim.Pohled; Cursor = Cursors.SizeAll; return; }
             if (e.Button != MouseButtons.Left) return;
             bool pridat = (ModifierKeys & (Keys.Control | Keys.Shift)) != 0;
+            if (nastroj != NastrojMysi.Vyber) { ZacniNastroj(e.Location, (ModifierKeys & Keys.Control) != 0); Hlas(); return; }
             if (NajdiBod(e.Location, out oi, out vi))
             {
                 long k = Klic(oi, vi);
@@ -818,6 +991,43 @@ namespace ObrysCNC
                 obdA = obdB = e.Location;
             }
             Hlas();
+        }
+
+        // Presun / otoceni celych obrysu mysi. Klik na obrys ho vybere (Ctrl = pridat k vyberu);
+        // pracuje se s obrysy, ktere maji vybrany bod, a kdyz neni vybrano nic, s celym vykresem.
+        void ZacniNastroj(Point p, bool pridat)
+        {
+            int oi, vi, seg = -1;
+            bool trefa = NajdiBod(p, out oi, out vi);
+            if (!trefa) trefa = NajdiSegment(p, out oi, out seg);
+            if (trefa)
+            {
+                bool uzVybran = false;
+                for (int v = 0; v < Obrysy[oi].Pts.Count && !uzVybran; v++) uzVybran = vyber.Contains(Klic(oi, v));
+                if (!uzVybran)
+                {
+                    if (!pridat) vyber.Clear();
+                    for (int v = 0; v < Obrysy[oi].Pts.Count; v++) vyber.Add(Klic(oi, v));
+                }
+            }
+            var ids = Cilove();
+            if (ids.Count == 0) return;
+            tahIds = ids;
+            tahZaloha = Kopie(Obrysy);
+            var m = Mm(p);
+            if (nastroj == NastrojMysi.Presun)
+            {
+                rezim = Rezim.TahObrysu;
+                tahPosledni = m;
+            }
+            else
+            {
+                rotZaklad = Kopie(Obrysy);
+                rotStred = StredCilu();
+                rotStart = Math.Atan2(m.Y - rotStred.Y, m.X - rotStred.X);
+                rotUhel = 0;
+                rezim = Rezim.Rotace;
+            }
         }
 
         void ZacniTah(Point p)
@@ -846,6 +1056,32 @@ namespace ObrysCNC
                     PosunVybrane(dx, dy, false);
                     tahPosledni = m;
                     break;
+                case Rezim.TahObrysu:
+                    {
+                        var m2 = Mm(e.Location);
+                        if (e.X == mysPred.X && e.Y == mysPred.Y) break;
+                        if (tahZaloha != null) { UlozZpet(tahZaloha, "Přesun obrysů myší"); tahZaloha = null; }
+                        foreach (int ti in tahIds) Obrysy[ti] = Geo.Posun(Obrysy[ti], m2.X - tahPosledni.X, m2.Y - tahPosledni.Y);
+                        tahPosledni = m2;
+                        if (Zmena != null) Zmena(this, EventArgs.Empty);
+                        break;
+                    }
+                case Rezim.Rotace:
+                    {
+                        var m3 = Mm(e.Location);
+                        double uh = Geo.Norm(Math.Atan2(m3.Y - rotStred.Y, m3.X - rotStred.X) - rotStart);
+                        // Shift = po 15 stupnich (tedy i presne 90 a 180)
+                        if ((ModifierKeys & Keys.Shift) != 0) uh = Math.Round(uh / (Math.PI / 12)) * (Math.PI / 12);
+                        if (uh == rotUhel) break;
+                        if (tahZaloha != null) { UlozZpet(tahZaloha, "Otočení myší"); tahZaloha = null; }
+                        rotUhel = uh;
+                        double rc, rs;
+                        CosSin(uh, out rc, out rs);
+                        // vzdy z puvodniho stavu, aby se pri tazeni nescitaly zaokrouhlovaci chyby
+                        foreach (int ti in tahIds) Obrysy[ti] = Otoceny(rotZaklad[ti], rotStred, rc, rs);
+                        if (Zmena != null) Zmena(this, EventArgs.Empty);
+                        break;
+                    }
                 case Rezim.Obdelnik:
                     obdB = e.Location;
                     var rr = Obdelnik(obdA, obdB);
@@ -858,7 +1094,9 @@ namespace ObrysCNC
                     break;
                 default:
                     int a, b;
-                    Cursor = NajdiBod(e.Location, out a, out b) ? Cursors.Hand : NajdiSegment(e.Location, out a, out b) ? Cursors.Cross : Cursors.Default;
+                    if (nastroj == NastrojMysi.Presun) Cursor = Cursors.SizeAll;
+                    else if (nastroj == NastrojMysi.Otoceni) Cursor = Cursors.Cross;
+                    else Cursor = NajdiBod(e.Location, out a, out b) ? Cursors.Hand : NajdiSegment(e.Location, out a, out b) ? Cursors.Cross : Cursors.Default;
                     break;
             }
             mysPred = e.Location;
@@ -870,6 +1108,7 @@ namespace ObrysCNC
             base.OnMouseUp(e);
             rezim = Rezim.Nic;
             tahZaloha = null;
+            rotZaklad = null;
             Cursor = Cursors.Default;
             Hlas();
         }

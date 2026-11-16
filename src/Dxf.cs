@@ -128,7 +128,7 @@ namespace ObrysCNC
                         var v = ents[++j];
                         if (((int)v.N(70, 0) & 16) != 0) continue;     // ridici body splajnu
                         o.Pts.Add(new P(X(v.N(10, 0)), v.N(20, 0)));
-                        o.B.Add(v.N(42, 0));
+                        o.B.Add(zrcadlo ? -v.N(42, 0) : v.N(42, 0));    // zrcadleni otaci smer oblouku
                     }
                     if (j + 1 < ents.Count && ents[j + 1].Typ == "SEQEND") j++;
                 }
@@ -139,7 +139,7 @@ namespace ObrysCNC
                     {
                         if (p.Key == 10) { o.Pts.Add(new P(X(Num(p.Value)), 0)); o.B.Add(0); }
                         else if (p.Key == 20 && o.Pts.Count > 0) o.Pts[o.Pts.Count - 1] = new P(o.Pts[o.Pts.Count - 1].X, Num(p.Value));
-                        else if (p.Key == 42 && o.B.Count > 0) o.B[o.B.Count - 1] = Num(p.Value);
+                        else if (p.Key == 42 && o.B.Count > 0) o.B[o.B.Count - 1] = zrcadlo ? -Num(p.Value) : Num(p.Value);
                     }
                 }
                 else if (e.Typ != "SEQEND" && e.Typ != "VERTEX")
@@ -259,6 +259,20 @@ namespace ObrysCNC
 
         static string F(double x) { return (Math.Abs(x) < 5e-9 ? 0 : x).ToString("0.00000000", Inv); }
 
+        // Nazev vrstvy pro DXF R12: soubor je ASCII, takze diakritika se prevede na zakladni pismena
+        // (FRÉZA -> FREZA) a ostatni nepovolene znaky na podtrzitko. Jinak by z nich v souboru byly otazniky.
+        public static string NazevVrstvy(string nazev)
+        {
+            var sb = new StringBuilder();
+            foreach (char ch in (nazev ?? "").Trim().Normalize(NormalizationForm.FormD))
+            {
+                if (CharUnicodeInfo.GetUnicodeCategory(ch) == UnicodeCategory.NonSpacingMark) continue;
+                bool ok = (ch >= 'A' && ch <= 'Z') || (ch >= 'a' && ch <= 'z') || (ch >= '0' && ch <= '9') || ch == '_' || ch == '-' || ch == '$';
+                sb.Append(ok ? ch : '_');
+            }
+            return sb.Length > 0 ? sb.ToString() : "0";
+        }
+
         // zapis DXF R12 (POLYLINE s bulge); bezOblouku = oblouky rozlozi na kratke usecky
         public static void Zapis(string soubor, List<Obrys> obrysy, Dictionary<string, int> barvyVrstev, bool bezOblouku)
         {
@@ -267,7 +281,15 @@ namespace ObrysCNC
             if (obrysy.Count == 0) { minx = miny = maxx = maxy = 0; }
             var sb = new StringBuilder();
             Action<int, string> g = (c, v) => { sb.Append(c).Append("\r\n").Append(v).Append("\r\n"); };
-            var vrstvy = obrysy.Select(o => o.Vrstva).Distinct().ToList();
+            // barva vrstvy se hleda podle puvodniho nazvu, do souboru jde nazev bez diakritiky
+            var barvy = new Dictionary<string, int>();
+            foreach (var o in obrysy)
+            {
+                string nv = NazevVrstvy(o.Vrstva);
+                int cb;
+                if (!barvy.ContainsKey(nv)) barvy[nv] = barvyVrstev != null && barvyVrstev.TryGetValue(o.Vrstva ?? "", out cb) ? cb : 7;
+            }
+            var vrstvy = barvy.Keys.ToList();
             g(0, "SECTION"); g(2, "HEADER");
             g(9, "$ACADVER"); g(1, "AC1009");
             g(9, "$INSBASE"); g(10, "0.0"); g(20, "0.0"); g(30, "0.0");
@@ -281,9 +303,7 @@ namespace ObrysCNC
             g(0, "TABLE"); g(2, "LAYER"); g(70, vrstvy.Count.ToString(Inv));
             foreach (var v in vrstvy)
             {
-                int c;
-                if (!barvyVrstev.TryGetValue(v, out c)) c = 7;
-                g(0, "LAYER"); g(2, v); g(70, "0"); g(62, c.ToString(Inv)); g(6, "CONTINUOUS");
+                g(0, "LAYER"); g(2, v); g(70, "0"); g(62, barvy[v].ToString(Inv)); g(6, "CONTINUOUS");
             }
             g(0, "ENDTAB");
             g(0, "ENDSEC");
@@ -302,13 +322,14 @@ namespace ObrysCNC
                     }
                     if (!o.Zavreny) pts.Add(o.Pts[o.Pts.Count - 1]);
                 }
-                g(0, "POLYLINE"); g(8, o.Vrstva); g(66, "1"); g(10, "0.0"); g(20, "0.0"); g(30, "0.0"); g(70, o.Zavreny ? "1" : "0");
+                string vr = NazevVrstvy(o.Vrstva);
+                g(0, "POLYLINE"); g(8, vr); g(66, "1"); g(10, "0.0"); g(20, "0.0"); g(30, "0.0"); g(70, o.Zavreny ? "1" : "0");
                 for (int i = 0; i < pts.Count; i++)
                 {
-                    g(0, "VERTEX"); g(8, o.Vrstva); g(10, F(pts[i].X)); g(20, F(pts[i].Y)); g(30, "0.0");
+                    g(0, "VERTEX"); g(8, vr); g(10, F(pts[i].X)); g(20, F(pts[i].Y)); g(30, "0.0");
                     if (i < b.Count && Math.Abs(b[i]) > 1e-9) g(42, b[i].ToString("0.000000000000", Inv));
                 }
-                g(0, "SEQEND"); g(8, o.Vrstva);
+                g(0, "SEQEND"); g(8, vr);
             }
             g(0, "ENDSEC");
             g(0, "EOF");
